@@ -1,0 +1,50 @@
+        try:
+            partyIndiv = Individual(status= alldata['status'],
+                                aristocraticTitle=alldata['aristocraticTitle'],
+                                birthDate = alldata['birthDate'],
+                                countryofBirth = alldata['countryOfBirth'],
+                                deathDate = alldata['deathDate'],
+                                familyName= alldata['familyName'],
+                                familyNamePrefix= alldata['familyNamePrefix'],
+                                formattedName= alldata['formattedName'],
+                                fullName= alldata['fullName'],
+                                gender = alldata['gender'],
+                                generation= alldata['generation'],
+                                givenName= alldata['givenName'],
+                                legalName= alldata['legalName'],
+                                location= alldata['location'],
+                                maritalStatus= alldata['maritalStatus'],
+                                middleName= alldata['middleName'],
+                                nationality= alldata['nationality'],
+                                placeofBirth= alldata['placeOfBirth'],
+                                preferredGivenName= alldata['preferredGivenName'],
+                                title= alldata['title'])
+        except:
+           return {'message': 'Validation errors', 'errors': 'Bad JSON'}, HTTPStatus.BAD_REQUEST
+
+
+		       def data(self):
+        return {
+            'id':self.id,
+            'href':self.href,
+            'status':self.status,
+            'aristocraticTitle': self.aristocraticTitle,
+            'birthDate':self.birth_date,
+            'countryofBirth':self.countryofBirth,
+            'deathDate':self.deathDate,
+            'familyName':self.familyName,
+            'familyNamePrefix':self.familyNamePrefix,
+            'formattedName':self.formattedName,
+            'fullName':self.fullName,
+            'gender':self.gender,
+            'generation':self.generation,
+            'givenName':self.given_name,
+            'legalName':self.legalName,
+            'location':self.location,
+            'maritalStatus':self.maritalStatus,
+            'middleName':self.middleName,
+            'nationality':self.nationality,
+            'placeofBirth':self.placeofBirth,
+            'preferredgivenName':self.preferredGivenName,
+            'title':self.title
+            }
