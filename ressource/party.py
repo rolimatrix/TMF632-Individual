@@ -17,11 +17,12 @@ from model.externalreference import ExternalReference
 
 from schemas.Individual import IndividualSchema, IndivtoTMF
 from schemas.medium import MediumSchema
+from schemas.characteristic import CharacteristicSchema
 
 Individual_Schema = IndividualSchema()
 IndivTMF632_Schema= IndivtoTMF()
-
 Medium_Schema = MediumSchema()
+Characteristic_Schema = CharacteristicSchema()
 
 def load_json(json_data):
     output_dict = {}
@@ -50,10 +51,17 @@ class Party(Resource):
 
         #Ckeck if thers is ContactMedium
         try:
-            medium = json_data['contactMedium']
+            mediumJson = json_data['contactMedium']
             contact_exist= True
         except:
             contact_exist= False
+
+        #Ckeck if thers is Characteristic
+        try:
+            CharJson = json_data['partyCharacteristic']
+            characteristic_exist= True
+        except:
+            characteristic_exist= False
 
         #check Json for Individual
         try:
@@ -66,7 +74,7 @@ class Party(Resource):
 
         if contact_exist:
             #it could be that we have more then one Contact
-            for m in medium:
+            for m in mediumJson:
                 # Make Contact Medium flat (without dictionary Characterstic and valid)
                 medium= load_json(m)
                 try:
@@ -75,7 +83,20 @@ class Party(Resource):
                     partyContact.fk_idIndiv = partyIndiv.id
                     partyContact.save()
                 except ValidationError as errors:
-                    return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUE
+                    return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
+
+        if characteristic_exist:
+            # it could be that we have more then one characteristic
+            for ch in CharJson:
+                character = load_json(ch)
+                try:
+                    dataM = Characteristic_Schema.load(data=character)
+                    partyChar = Characterstic(**dataM)
+                    partyChar.fk_idIndiv = partyIndiv.id
+                    partyChar.save()
+                except ValidationError as errors:
+                    return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
+
 
         partyIndiv = Individual.get_by_id(partyIndiv.id)
 

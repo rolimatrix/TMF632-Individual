@@ -10,9 +10,9 @@ class Characterstic(db.Model):
     valueType = db.Column(db.String(), nullable=True)
     value = db.Column(db.String(), nullable=False)
 
-    baseType = db.Column(db.String(), nullable=True, default='PartyChar')
+    baseType = db.Column(db.String(), nullable=True)
     schemaLocation = db.Column(db.String(), nullable=True)
-    type = db.Column(db.String(), nullable=True, default='PartyIndivChar')
+    type = db.Column(db.String(), nullable=True)
 
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())

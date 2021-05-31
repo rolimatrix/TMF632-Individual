@@ -1,5 +1,6 @@
 from marshmallow import Schema, fields, validate
 from schemas.medium import contMedtoTMF_Schema
+from schemas.characteristic import CharacteristicSchema
 from flask import request
 
 class IndividualSchema(Schema):
@@ -59,8 +60,11 @@ class IndivtoTMF(Schema):
     preferredGivenName = fields.String(required=False)
     title = fields.String(required=False)
     contactMedium = fields.Nested(contMedtoTMF_Schema, attribute='contactmedium',dump_only=True,many=True)
+    partyCharacteristic= fields.Nested(CharacteristicSchema, attribute='characteristic',dump_only=True,many=True)
 
     def buildHref(self,partyIndiv):
         url = request.url
-        characters = "{}/{}".format(url, partyIndiv.id)
-        return characters
+        if str(partyIndiv.id) not in url:
+            url = "{}/{}".format(url, partyIndiv.id)
+
+        return url

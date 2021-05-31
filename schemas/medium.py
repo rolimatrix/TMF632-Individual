@@ -18,9 +18,9 @@ class MediumSchema(Schema):
     stateOrProvince = fields.String(required=False)
     street1 = fields.String(required=False)
     street2 = fields.String(required=False)
-    baseType = fields.String(required=False, default="TMF Medium")
+    baseType = fields.String(required=True)
     schemaLocation = fields.String(required=False)
-    type = fields.String(required=False, default="Medium")
+    type = fields.String(required=True)
     endDateTime = fields.String(required=False)
     startDateTime = fields.String(required=False)
 

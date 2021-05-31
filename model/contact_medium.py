@@ -9,9 +9,9 @@ class ContactMedium(db.Model):
     mediumType = db.Column(db.String(), nullable=True)
     preferred = db.Column(db.Boolean(), nullable=True)
 
-    baseType = db.Column(db.String(), nullable=True, default='ContactMedium')
+    baseType = db.Column(db.String(), nullable=True,default="TMF Medium")
     schemaLocation = db.Column(db.String(), nullable=True)
-    type = db.Column(db.String(), nullable=True, default = 'ContactMediumPartyIndiv')
+    type = db.Column(db.String(), nullable=True, default="Medium")
 
     endDateTime =  db.Column(db.String(), nullable=True)
     startDateTime = db.Column(db.String(), nullable=True)
