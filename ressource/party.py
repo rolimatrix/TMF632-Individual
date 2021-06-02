@@ -43,8 +43,11 @@ class Party(Resource):
     @swag_from('TMF632PartyIndiv_V1.yml',endpoint='individual', methods=['POST'])
 
     def post(self):
-
-        json_data = request.get_json()
+        # check if request is well formed Json
+        try:
+            json_data = request.get_json()
+        except:
+            return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
 
         #Take root Values for class Individual from requested Json
         indivJson=load_json(json_data)
@@ -83,6 +86,7 @@ class Party(Resource):
                     partyContact.fk_idIndiv = partyIndiv.id
                     partyContact.save()
                 except ValidationError as errors:
+                    partyIndiv.delete()
                     return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
 
         if characteristic_exist:
@@ -95,6 +99,7 @@ class Party(Resource):
                     partyChar.fk_idIndiv = partyIndiv.id
                     partyChar.save()
                 except ValidationError as errors:
+                    partyIndiv.delete()
                     return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
 
 
