@@ -23,7 +23,7 @@ Then go to Terminal and type in following 3 Command:
 2. FLASK DB MIGRATE
 3. FLASK DB UPGRADE
 
-=> look on you Database. Yu will see 7 Tables from APP. One Alembic Table.
+=> look on you Database. You will see 7 Tables from APP. One Alembic Table.
 Then start APP.
 Then start Postman. You can import Party postman.collection.json and try POST/GET/DELETE.
 
