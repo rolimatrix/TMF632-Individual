@@ -8,6 +8,7 @@ class ContactMedium(db.Model):
 
     mediumType = db.Column(db.String(), nullable=True)
     preferred = db.Column(db.Boolean(), nullable=True)
+    mediumVerified= db.Column(db.Boolean(), nullable=True, default=False)
 
     baseType = db.Column(db.String(), nullable=True,default="TMF Medium")
     schemaLocation = db.Column(db.String(), nullable=True)
@@ -26,6 +27,8 @@ class ContactMedium(db.Model):
     socialNetworkId = db.Column(db.String(), nullable=True)
     stateOrProvince= db.Column(db.String(), nullable=True)
     street1 = db.Column(db.String(), nullable=True)
+    houseNumber=db.Column(db.String(), nullable=True)
+    houseNumberAppendix=db.Column(db.String(), nullable=True)
     street2 = db.Column(db.String(), nullable=True)
     baseTypeMediChar = db.Column(db.String(), nullable=True)
     schemaLocationMediChar = db.Column(db.String(), nullable=True)

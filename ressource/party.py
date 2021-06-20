@@ -47,7 +47,7 @@ class Party(Resource):
         try:
             json_data = request.get_json()
         except:
-            return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
+            return {'message': 'Validation errors', 'errors': 'Invalid JSON'}, HTTPStatus.BAD_REQUEST
 
         #Take root Values for class Individual from requested Json
         indivJson=load_json(json_data)

@@ -15,4 +15,6 @@ class ComChar_Schema(Schema):
     socialNetworkId = fields.String(dump_only=True)
     stateOrProvince = fields.String(dump_only=True)
     street1 = fields.String(dump_only=True)
+    houseNumber=fields.String(dump_only=True)
+    houseNumberAppendix=fields.String(dump_only=True)
     street2 = fields.String(dump_only=True)

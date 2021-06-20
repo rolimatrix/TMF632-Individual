@@ -1,12 +1,13 @@
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, validate, validates, ValidationError
 #from schemas.comCharracteristic import ComChar_Schema
 
 class MediumSchema(Schema):
     class Meta:
         ordered = True
 
-    mediumType = fields.String(required=False)
+    mediumType = fields.String()
     preferred = fields.Boolean(required=False)
+    mediumVerified= fields.Boolean(required=False)
     city = fields.String(required=False)
     contactType = fields.String(required=False)
     country = fields.String(required=False)
@@ -17,12 +18,19 @@ class MediumSchema(Schema):
     socialNetworkId = fields.String(required=False)
     stateOrProvince = fields.String(required=False)
     street1 = fields.String(required=False)
+    houseNumber=fields.String(required=False)
+    houseNumberAppendix=fields.String(required=False)
     street2 = fields.String(required=False)
     baseType = fields.String(required=True)
     schemaLocation = fields.String(required=False)
     type = fields.String(required=True)
     endDateTime = fields.String(required=False)
     startDateTime = fields.String(required=False)
+
+    @validates('mediumType')
+    def validate_mediumType(self, value):
+        if value not in ['EMAIL', 'FIXED_LINE', 'MOBILE', 'ADDRESS', 'SOCIAL', 'FAX']:
+            raise ValidationError('Invalid Medium Type delivered')
 
 class contMedtoTMF_Schema(Schema):
     class Meta:
@@ -46,6 +54,8 @@ class contMedtoTMF_Schema(Schema):
                 'emailAddress': partyIndiv.emailAddress,
                 'city': partyIndiv.city,
                 'street1': partyIndiv.street1,
+                'houseNumber': partyIndiv.houseNumber,
+                'houseNumberAppendix': partyIndiv.houseNumberAppendix,
                 'street2': partyIndiv.street2,
                 'country': partyIndiv.country,
                 'phoneNumber':partyIndiv.phoneNumber,
