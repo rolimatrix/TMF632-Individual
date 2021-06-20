@@ -1,72 +1,77 @@
 {
-  "aristocraticTitle": "",
+  "aristocraticTitle": null,
   "birthDate": "20.08.2021",
   "countryOfBirth": "Germany",
-  "deathDate": "",
+  "deathDate": null,
   "familyName": "Schier",
-  "familyNamePrefix": "",
+  "familyNamePrefix": null,
   "formattedName": "Roland Schier",
-  "fullName": "",
+  "fullName": null,
   "gender": "male",
-  "generation": "",
+  "generation": null,
   "givenName": "Roland",
-  "legalName": "",
-  "location": "",
+  "legalName": null,
+  "location": null,
   "maritalStatus": "married",
-  "middleName": "",
+  "middleName": null,
   "nationality": "German",
   "placeOfBirth": "Münster",
-  "preferredGivenName": "",
+  "preferredGivenName": null,
   "title": "Dipl. Ing.",
   "status": "initialized",
   "contactMedium": [
     {
-      "mediumType": "EMail",
+      "mediumType": "ADDRESS",
       "preferred": true,
       "characteristic": {
         "city": "Münster",
-        "contactType": "",
         "country": "Germany",
-        "emailAddress": "Roland.Schier@me.com",
-        "faxNumber": "",
-        "phoneNumber": "",
+        "emailAddress": null,
+        "faxNumber": null,
+        "phoneNumber": null,
         "postCode": "48165",
-        "socialNetworkId": "",
+        "socialNetworkId": null,
         "stateOrProvince": "",
-        "street1": "Böttcherstr. 107",
+        "street1": "Böttcherstr.",
+        "houseNumber": "107",
+        "houseNumberAppendix": null,
         "street2": "",
-        "@baseType": "",
-        "@schemaLocation": "",
-        "@type": ""
+        "@baseType": "TMF Medium",
+        "@schemaLocation": null,
+        "@type": "Medium"
       },
       "validFor": {
-        "endDateTime": "",
-        "startDateTime": ""
+        "endDateTime": null,
+        "startDateTime": null
       }
     },
-         {
-      "mediumType": "Mobile",
+    {
+      "mediumType": "MOBILE",
       "preferred": false,
       "characteristic": {
-        "city": "",
-        "contactType": "",
-        "country": "",
-        "emailAddress": "",
-        "faxNumber": "",
         "phoneNumber": "1605353657",
-        "postCode": "",
-        "socialNetworkId": "",
-        "stateOrProvince": "",
-        "street1": "",
-        "street2": "",
-        "@baseType": "",
-        "@schemaLocation": "",
-        "@type": ""
-      },
+        "@baseType": null,
+        "@schemaLocation": null,
+        "@type": null
+        },
       "validFor": {
-        "endDateTime": "",
-        "startDateTime": ""
-      }
+        "endDateTime": null,
+        "startDateTime": null
+        }
+    },
+        {
+      "mediumType": "EMAIL",
+      "preferred": false,
+      "characteristic": {
+        "emailAddress": "Roland-Schier@me.com",
+        "@baseType": null,
+        "@schemaLocation": null,
+        "@type": null
+        },
+      "validFor": {
+        "endDateTime": null,
+        "startDateTime": null
+        }
     }
   ],
   "externalReference": [
@@ -102,12 +107,20 @@
   ],
   "partyCharacteristic": [
     {
-      "name": "",
-      "valueType": "",
-      "value": {},
-      "@baseType": "",
-      "@schemaLocation": "",
-      "@type": ""
+      "name": "Role",
+      "valueType": null,
+      "value": "Landloard",
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": null
+    },
+    {
+      "name": "RoleType",
+      "valueType": null,
+      "value": "Teileigentümer",
+      "@baseType": null,
+      "@schemaLocation": null,
+      "@type": null
     }
   ],
   "relatedParty": [

@@ -8,8 +8,8 @@ class IndividualSchema(Schema):
         ordered = True
 
     id = fields.Integer(dump_only=True)
-    status = fields.String()
-    aristocraticTitle = fields.String(required=True)
+    status = fields.String(required=True)
+    aristocraticTitle = fields.String(required=False)
     birthDate = fields.String(required=False)
     countryOfBirth= fields.String(required=False)
     deathDate = fields.String(required=False)

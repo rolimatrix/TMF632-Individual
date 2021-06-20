@@ -9,7 +9,7 @@ class Individual(db.Model):
     countryOfBirth = db.Column(db.String(), nullable=True)
     deathDate= db.Column(db.String(), nullable=True)
     familyName = db.Column(db.String(), nullable=False)
-    familyNamePrefix= db.Column(db.String(), nullable=False)
+    familyNamePrefix= db.Column(db.String(), nullable=True)
     formattedName = db.Column(db.String(), nullable=True)
     fullName = db.Column(db.String(), nullable=True)
     gender = db.Column(db.String(), nullable=True)

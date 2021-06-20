@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields, validate, validates, ValidationError
+import re
 #from schemas.comCharracteristic import ComChar_Schema
 
 class MediumSchema(Schema):
@@ -21,9 +22,9 @@ class MediumSchema(Schema):
     houseNumber=fields.String(required=False)
     houseNumberAppendix=fields.String(required=False)
     street2 = fields.String(required=False)
-    baseType = fields.String(required=True)
+    baseType = fields.String(required=False)
     schemaLocation = fields.String(required=False)
-    type = fields.String(required=True)
+    type = fields.String(required=False)
     endDateTime = fields.String(required=False)
     startDateTime = fields.String(required=False)
 
@@ -31,7 +32,14 @@ class MediumSchema(Schema):
     def validate_mediumType(self, value):
         if value not in ['EMAIL', 'FIXED_LINE', 'MOBILE', 'ADDRESS', 'SOCIAL', 'FAX']:
             raise ValidationError('Invalid Medium Type delivered')
-
+    @validates('emailAddress')
+    def check(self, value):
+        if value!='':
+            regex = '^[A-Za-z0-9]+[\._-]?[A-Za-z0-9]+[@]\w+[.]\w{2,3}$'
+            if (re.search(regex, value)):
+                print("Valid Email")
+            else:
+                raise ValidationError('Invalid EMail Address')
 class contMedtoTMF_Schema(Schema):
     class Meta:
         ordered = True
