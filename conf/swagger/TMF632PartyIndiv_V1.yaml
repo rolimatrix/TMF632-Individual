@@ -914,7 +914,8 @@
         },
         "emailAddress": {
           "type": "string",
-          "description": "Full email address in standard format"
+          "pattern": "^[A-Za-z0-9]+[\\._-]?[A-Za-z0-9]+[@]\\w+[.]\\w{2,3}$",
+          "description": "Full email address in standard format. See regular exprssion. This should describe Checker for validating EMail Addresse."
         },
         "faxNumber": {
           "type": "string",
