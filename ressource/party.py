@@ -18,6 +18,7 @@ from model.externalreference import ExternalReference
 from schemas.Individual import IndividualSchema, IndivtoTMF
 from schemas.medium import MediumSchema
 from schemas.characteristic import CharacteristicSchema
+from tmf_errors import errorFormaterMarshmallow
 
 Individual_Schema = IndividualSchema()
 IndivTMF632_Schema= IndivtoTMF()
@@ -47,7 +48,7 @@ class Party(Resource):
         try:
             json_data = request.get_json()
         except:
-            return {'message': 'Validation errors', 'errors': 'Invalid JSON'}, HTTPStatus.BAD_REQUEST
+            return errorFormaterMarshmallow(400, 'Validation errors', errors), HTTPStatus.BAD_REQUEST
 
         #Take root Values for class Individual from requested Json
         indivJson=load_json(json_data)
@@ -73,7 +74,7 @@ class Party(Resource):
             partyIndiv.save()
 
         except ValidationError as errors:
-            return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
+            return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
 
         if contact_exist:
             #it could be that we have more then one Contact
@@ -87,7 +88,7 @@ class Party(Resource):
                     partyContact.save()
                 except ValidationError as errors:
                     partyIndiv.delete()
-                    return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
+                    return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
 
         if characteristic_exist:
             # it could be that we have more then one characteristic
@@ -100,7 +101,7 @@ class Party(Resource):
                     partyChar.save()
                 except ValidationError as errors:
                     partyIndiv.delete()
-                    return {'message': 'Validation errors', 'errors': errors.messages}, HTTPStatus.BAD_REQUEST
+                    return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
 
 
         partyIndiv = Individual.get_by_id(partyIndiv.id)
@@ -114,7 +115,7 @@ class PartyId(Resource):
         partyIndiv = Individual.get_by_id(indiv_id=id)
 
         if partyIndiv is None:
-            return {'message': 'Party not found'}, HTTPStatus.NOT_FOUND
+            return errorFormaterMarshmallow(400, 'Party not found'), HTTPStatus.NOT_FOUND
 
         partyIndiv.delete()
         return {}, HTTPStatus.NO_CONTENT
@@ -124,6 +125,6 @@ class PartyId(Resource):
         partyIndiv = Individual.get_by_id(indiv_id=id)
 
         if partyIndiv is None:
-            return {'message': 'Party not found'}, HTTPStatus.NOT_FOUND
+            return errorFormaterMarshmallow(400, 'Party not found'), HTTPStatus.NOT_FOUND
 
         return IndivTMF632_Schema.dump(partyIndiv), HTTPStatus.OK
