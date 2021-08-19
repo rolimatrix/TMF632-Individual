@@ -1,0 +1,8 @@
+dependencies:
+- name: "app"
+  version: "v2"
+  dest: "charts/app"
+helmfiles:
+- name: "app"
+  version: "v2"
+  dest: "."

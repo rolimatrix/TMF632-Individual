@@ -1,0 +1,7 @@
+app_name: &app_name_definition "svc-zero-ikutuzov"
+
+app:
+  enable_apm_upload_job: false
+  name: *app_name_definition
+  image:
+    name: *app_name_definition

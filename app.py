@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_restful import Api, Resource
 from flask_script import Manager
+from flask_script._compat import text_type
+
 from flask_migrate import Migrate, MigrateCommand
 
 from flask_cors import CORS
