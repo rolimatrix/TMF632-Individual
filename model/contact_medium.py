@@ -10,9 +10,9 @@ class ContactMedium(db.Model):
     preferred = db.Column(db.Boolean(), nullable=True)
     mediumVerified= db.Column(db.Boolean(), nullable=True, default=False)
 
-    baseType = db.Column(db.String(), nullable=True,default="TMF Medium")
-    schemaLocation = db.Column(db.String(), nullable=True)
-    type = db.Column(db.String(), nullable=True, default="Medium")
+    #baseType = db.Column(db.String(), nullable=True,default="TMF Medium")
+    #schemaLocation = db.Column(db.String(), nullable=True)
+    #type = db.Column(db.String(), nullable=True, default="Medium")
 
     endDateTime =  db.Column(db.String(), nullable=True)
     startDateTime = db.Column(db.String(), nullable=True)
@@ -30,9 +30,9 @@ class ContactMedium(db.Model):
     houseNumber=db.Column(db.String(), nullable=True)
     houseNumberAppendix=db.Column(db.String(), nullable=True)
     street2 = db.Column(db.String(), nullable=True)
-    baseTypeMediChar = db.Column(db.String(), nullable=True)
-    schemaLocationMediChar = db.Column(db.String(), nullable=True)
-    typeMediChar = db.Column(db.String(), nullable=True)
+    #baseTypeMediChar = db.Column(db.String(), nullable=True)
+    #schemaLocationMediChar = db.Column(db.String(), nullable=True)
+    #typeMediChar = db.Column(db.String(), nullable=True)
 
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())

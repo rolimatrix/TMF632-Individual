@@ -22,9 +22,9 @@ class MediumSchema(Schema):
     houseNumber=fields.String(required=False)
     houseNumberAppendix=fields.String(required=False)
     street2 = fields.String(required=False)
-    baseType = fields.String(required=False)
-    schemaLocation = fields.String(required=False)
-    type = fields.String(required=False)
+    #baseType = fields.String(required=False)
+    #schemaLocation = fields.String(required=False)
+    #type = fields.String(required=False)
     endDateTime = fields.String(required=False)
     startDateTime = fields.String(required=False)
 
@@ -46,9 +46,9 @@ class contMedtoTMF_Schema(Schema):
 
     mediumType = fields.String(dump_only=True)
     preferred = fields.Boolean(dump_only=True)
-    baseType = fields.String(dump_only=True)
-    schemaLocation = fields.String(dump_only=True)
-    type = fields.String(dump_only=True)
+    #baseType = fields.String(dump_only=True)
+    #schemaLocation = fields.String(dump_only=True)
+    #type = fields.String(dump_only=True)
     #this doesn't work
     #characteristic = fields.Nested(ComChar_Schema, attribute='contactmedium', dump_only=True)
     #choose that solution

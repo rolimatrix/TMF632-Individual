@@ -14,9 +14,9 @@ class Skill(db.Model):
     validforendDateTime = db.Column(db.String(30), nullable=True)
     validforstartDateTime = db.Column(db.String(30), nullable=True)
 
-    baseType = db.Column(db.Integer, nullable=True, default='Skill')
-    schemaLocation= db.Column(db.Integer, nullable=True)
-    type= db.Column(db.Integer, nullable=True, default='SkillPartyIndiv')
+    #baseType = db.Column(db.Integer, nullable=True, default='Skill')
+    #schemaLocation= db.Column(db.Integer, nullable=True)
+    #type= db.Column(db.Integer, nullable=True, default='SkillPartyIndiv')
 
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())

@@ -20,9 +20,9 @@ class OtherName(db.Model):
     validforendDateTime = db.Column(db.String(30), nullable=True)
     validforstartDateTime = db.Column(db.String(30), nullable=True)
 
-    baseType = db.Column(db.Integer, nullable=True, default='OtherName')
-    schemaLocation= db.Column(db.Integer, nullable=True)
-    type= db.Column(db.Integer, nullable=True, default='OtherNamePartyIndiv')
+    #baseType = db.Column(db.Integer, nullable=True, default='OtherName')
+    #schemaLocation= db.Column(db.Integer, nullable=True)
+    #type= db.Column(db.Integer, nullable=True, default='OtherNamePartyIndiv')
 
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())
