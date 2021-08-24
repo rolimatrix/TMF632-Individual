@@ -11,16 +11,20 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/party-management-individual/individual/10",
+					"raw": "http://127.0.0.1:5000/party/v1/individual/1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"127",
+						"0",
+						"0",
+						"1"
 					],
 					"port": "5000",
 					"path": [
-						"party-management-individual",
+						"party",
+						"v1",
 						"individual",
-						"10"
+						"1"
 					],
 					"query": [
 						{
@@ -40,7 +44,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"id\": \"string\",\r\n  \"href\": \"string\",\r\n  \"aristocraticTitle\": \"string\",\r\n  \"birthDate\": \"2021-05-24T19:44:02.733Z\",\r\n  \"countryOfBirth\": \"string\",\r\n  \"deathDate\": \"2021-05-24T19:44:02.733Z\",\r\n  \"familyName\": \"string\",\r\n  \"familyNamePrefix\": \"string\",\r\n  \"formattedName\": \"string\",\r\n  \"fullName\": \"string\",\r\n  \"gender\": \"string\",\r\n  \"generation\": \"string\",\r\n  \"givenName\": \"string\",\r\n  \"legalName\": \"string\",\r\n  \"location\": \"string\",\r\n  \"maritalStatus\": \"string\",\r\n  \"middleName\": \"string\",\r\n  \"nationality\": \"string\",\r\n  \"placeOfBirth\": \"string\",\r\n  \"preferredGivenName\": \"string\",\r\n  \"title\": \"string\",\r\n  \"contactMedium\": [\r\n    {\r\n      \"mediumType\": \"string\",\r\n      \"preferred\": true,\r\n      \"characteristic\": {\r\n        \"city\": \"string\",\r\n        \"contactType\": \"string\",\r\n        \"country\": \"string\",\r\n        \"emailAddress\": \"string\",\r\n        \"faxNumber\": \"string\",\r\n        \"phoneNumber\": \"string\",\r\n        \"postCode\": \"string\",\r\n        \"socialNetworkId\": \"string\",\r\n        \"stateOrProvince\": \"string\",\r\n        \"street1\": \"string\",\r\n        \"street2\": \"string\",\r\n        \"@baseType\": \"string\",\r\n        \"@schemaLocation\": \"string\",\r\n        \"@type\": \"string\"\r\n      },\r\n      \"validFor\": {\r\n        \"endDateTime\": \"2021-05-24T19:44:02.733Z\",\r\n        \"startDateTime\": \"2021-05-24T19:44:02.733Z\"\r\n      },\r\n      \"@baseType\": \"string\",\r\n      \"@schemaLocation\": \"string\",\r\n      \"@type\": \"string\"\r\n    }\r\n  ],\r\n  \"externalReference\": [\r\n    {\r\n      \"externalReferenceType\": \"string\",\r\n      \"name\": \"string\",\r\n      \"@baseType\": \"string\",\r\n      \"@schemaLocation\": \"string\",\r\n      \"@type\": \"string\"\r\n    }\r\n  ],\r\n  \"otherName\": [\r\n    {\r\n      \"aristocraticTitle\": \"string\",\r\n      \"familyName\": \"string\",\r\n      \"familyNamePrefix\": \"string\",\r\n      \"formattedName\": \"string\",\r\n      \"fullName\": \"string\",\r\n      \"generation\": \"string\",\r\n      \"givenName\": \"string\",\r\n      \"legalName\": \"string\",\r\n      \"middleName\": \"string\",\r\n      \"preferredGivenName\": \"string\",\r\n      \"title\": \"string\",\r\n      \"validFor\": {\r\n        \"endDateTime\": \"2021-05-24T19:44:02.733Z\",\r\n        \"startDateTime\": \"2021-05-24T19:44:02.733Z\"\r\n      },\r\n      \"@baseType\": \"string\",\r\n      \"@schemaLocation\": \"string\",\r\n      \"@type\": \"string\"\r\n    }\r\n  ],\r\n  \"partyCharacteristic\": [\r\n    {\r\n      \"name\": \"string\",\r\n      \"valueType\": \"string\",\r\n      \"value\": \"string\",\r\n      \"@baseType\": \"string\",\r\n      \"@schemaLocation\": \"string\",\r\n      \"@type\": \"string\"\r\n    }\r\n  ],\r\n  \"relatedParty\": [\r\n    {\r\n      \"id\": \"string\",\r\n      \"href\": \"string\",\r\n      \"name\": \"string\",\r\n      \"role\": \"string\",\r\n      \"@baseType\": \"string\",\r\n      \"@schemaLocation\": \"string\",\r\n      \"@type\": \"string\",\r\n      \"@referredType\": \"string\"\r\n    }\r\n  ],\r\n  \"skill\": [\r\n    {\r\n      \"comment\": \"string\",\r\n      \"evaluatedLevel\": \"string\",\r\n      \"skillCode\": \"string\",\r\n      \"skillName\": \"string\",\r\n      \"validFor\": {\r\n        \"endDateTime\": \"2021-05-24T19:44:02.734Z\",\r\n        \"startDateTime\": \"2021-05-24T19:44:02.734Z\"\r\n      },\r\n      \"@baseType\": \"string\",\r\n      \"@schemaLocation\": \"string\",\r\n      \"@type\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"initialized\"\r\n}",
+					"raw": "{\r\n  \"aristocraticTitle\": null,\r\n  \"birthDate\": \"20.08.2021\",\r\n  \"countryOfBirth\": \"Germany\",\r\n  \"deathDate\": null,\r\n  \"familyName\": \"Schier\",\r\n  \"familyNamePrefix\": null,\r\n  \"formattedName\": \"Roland Schier\",\r\n  \"fullName\": null,\r\n  \"gender\": \"male\",\r\n  \"generation\": null,\r\n  \"givenName\": \"Roland\",\r\n  \"legalName\": null,\r\n  \"location\": null,\r\n  \"maritalStatus\": \"married\",\r\n  \"middleName\": null,\r\n  \"nationality\": \"German\",\r\n  \"placeOfBirth\": \"Münster\",\r\n  \"preferredGivenName\": null,\r\n  \"title\": \"Dipl. Ing.\",\r\n  \"status\": \"initialized\",\r\n  \"contactMedium\": [\r\n    {\r\n      \"mediumType\": \"ADDRESS\",\r\n      \"preferred\": true,\r\n      \"characteristic\": {\r\n        \"city\": \"Münster\",\r\n        \"country\": \"Germany\",\r\n        \"emailAddress\": null,\r\n        \"faxNumber\": null,\r\n        \"phoneNumber\": null,\r\n        \"postCode\": \"48165\",\r\n        \"socialNetworkId\": null,\r\n        \"stateOrProvince\": \"\",\r\n        \"street1\": \"Böttcherstr.\",\r\n        \"houseNumber\": \"107\",\r\n        \"houseNumberAppendix\": null,\r\n        \"street2\": \"\"\r\n      },\r\n      \"validFor\": {\r\n        \"endDateTime\": null,\r\n        \"startDateTime\": null\r\n      }\r\n    },\r\n    {\r\n      \"mediumType\": \"MOBILE\",\r\n      \"preferred\": false,\r\n      \"characteristic\": {\r\n        \"phoneNumber\": \"1605353657\"\r\n        },\r\n      \"validFor\": {\r\n        \"endDateTime\": null,\r\n        \"startDateTime\": null\r\n        }\r\n    },\r\n        {\r\n      \"mediumType\": \"EMAIL\",\r\n      \"preferred\": false,\r\n      \"characteristic\": {\r\n        \"emailAddress\": \"Roland.Schier@me.com\"\r\n        },\r\n      \"validFor\": {\r\n        \"endDateTime\": null,\r\n        \"startDateTime\": null\r\n        }\r\n    }\r\n  ],\r\n  \"partyCharacteristic\": [\r\n    {\r\n      \"name\": \"Role\",\r\n      \"valueType\": null,\r\n      \"value\": \"Landloard\"\r\n    },\r\n    {\r\n      \"name\": \"RoleType\",\r\n      \"valueType\": null,\r\n      \"value\": \"Teileigentümer\"\r\n    }\r\n  ],\r\n  \"relatedParty\": [\r\n    {\r\n      \"id\" : \"10007\",  \r\n      \"href\": null,\r\n      \"name\": \"PTI 31\",\r\n      \"role\": \"Rolloutpartner\"\r\n    }\r\n  ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,14 +52,15 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/party-management/individual",
+					"raw": "http://localhost:5000/party/v1/individual",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"party-management",
+						"party",
+						"v1",
 						"individual"
 					]
 				}
@@ -68,16 +73,40 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/party-management-individual/individual/10",
+					"raw": "http://localhost:5000/party/v1/individual/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"party-management-individual",
+						"party",
+						"v1",
 						"individual",
-						"10"
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/actuator/health",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"actuator",
+						"health"
 					]
 				}
 			},
