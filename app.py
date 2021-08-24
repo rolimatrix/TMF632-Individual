@@ -11,14 +11,12 @@ from flask_cors import CORS
 from flasgger import Swagger
 
 from ressource.party import Party, PartyId
-from ressource.health import Healthx, Healthz
+from ressource.health import Health
 from extensions import db
 
 
 def create_app():
     app = Flask(__name__)
-
-
 
     env = os.environ.get('ENV', 'Development')
     if env == "Production":
@@ -41,6 +39,7 @@ def register_extensions(app):
     db.init_app(app)
     migrate = Migrate(app, db)
     manager= Manager(app)
+    db.create_all(app=app)
     manager.add_command('db', MigrateCommand)
     app.config['SWAGGER'] = {
         'title': 'Giga Party Individual',
@@ -54,10 +53,9 @@ def register_extensions(app):
 
 def register_resources(app):
     api = Api(app)
-    api.add_resource(Party, '/party-management-individual/individual')
-    api.add_resource(Healthz, '/party-management-individual/healthz')
-    api.add_resource(Healthx, '/party-management-individual/healthx')
-    api.add_resource(PartyId, '/party-management-individual/individual/<int:id>')
+    api.add_resource(Party, '/party/v1/individual')
+    api.add_resource(Health, '/actuator/health')
+    api.add_resource(PartyId, '/party/v1/individual/<int:id>')
 
 
 

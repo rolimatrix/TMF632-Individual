@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields, validate, validates, ValidationError
 from schemas.medium import contMedtoTMF_Schema
 from schemas.characteristic import CharacteristicSchema
+from schemas.relatedParty import RelatedPartySchema
 from flask import request
 
 class IndividualSchema(Schema):
@@ -31,7 +32,7 @@ class IndividualSchema(Schema):
 
     @validates('status')
     def validate_status(self, value):
-        if value not in ['initialized', 'validated', 'deceaded']:
+        if value not in ['initialized', 'validated', 'deceased']:
             raise ValidationError('Invalid Status of PartyIndividual')
     @validates('familyName')
     def validate_familyName(self, value):
@@ -72,6 +73,7 @@ class IndivtoTMF(Schema):
     title = fields.String(dump_only=True)
     contactMedium = fields.Nested(contMedtoTMF_Schema, attribute='contactmedium',dump_only=True,many=True)
     partyCharacteristic= fields.Nested(CharacteristicSchema, attribute='characteristic',dump_only=True,many=True)
+    relatedParty = fields.Nested(RelatedPartySchema, attribute='relatedparty', dump_only=True, many=True)
 
     def buildHref(self,partyIndiv):
         url = request.url

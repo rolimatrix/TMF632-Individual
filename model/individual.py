@@ -26,10 +26,10 @@ class Individual(db.Model):
 
     contactmedium = db.relationship('ContactMedium', cascade="all, delete",backref='individual')
     characteristic = db.relationship('Characterstic', cascade="all, delete",backref='individual')
-    othername = db.relationship('OtherName', cascade="all, delete", backref='individual')
+    #othername = db.relationship('OtherName', cascade="all, delete", backref='individual')
     relatedparty = db.relationship('RelatedParty', cascade="all, delete", backref='individual')
-    skill = db.relationship('Skill', cascade="all, delete", backref='individual')
-    externalreference = db.relationship('ExternalReference', cascade="all, delete", backref='individual')
+    #skill = db.relationship('Skill', cascade="all, delete", backref='individual')
+    #externalreference = db.relationship('ExternalReference', cascade="all, delete", backref='individual')
 
     created_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now())
     updated_at = db.Column(db.DateTime(), nullable=False, server_default=db.func.now(), onupdate=db.func.now())

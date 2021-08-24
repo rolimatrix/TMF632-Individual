@@ -1,1179 +1,595 @@
-{
-  "swagger": "2.0",
-  "info": {
-    "title": "API Party Individual in Giga",
-    "description": "## TMF API Reference : TMF 632 - Party \n\n### Release : 19.0 \n\nThe party API provides standardized mechanism for party management such as creation, update, retrieval and deletion. Party Individual  has any kind of relation inside Fibre NetCo or InfCo. Party is created to record individual information. For example, within the context of a Creating non Connected Orders, Party API allows creation of the Customer as an individual for later use and processing. Consumer of that API should reference on an Individual with the ID of the Individual. This is the Key that Consumer has to store in theire Modell.\n\n\n### Resources\n- Individual\n\nParty API performs the following operations :\n- Retrieve an individual\n- Retrieve a collection individuals according to given criteria\n  This Endpoint will not go in use in Giga. No Implemntation needed.\n- Create a new individual\n- Update an existing individual\n- Delete an existing individual",
-    "version": "1.0.0 based on TMF632 Version 4.0.0"
-  },
-  "host": "localhost:5000",
-  "basePath": "/party-management-individual/",
-  "schemes": [
-    "http"
-  ],
-  "consumes": [
-    "application/json;charset=utf-8"
-  ],
-  "produces": [
-    "application/json;charset=utf-8"
-  ],
-  "tags": [
-    {
-      "name": "individual"
-    }
-  ],
-  "securityDefinitions": {
-    "OauthSecurity": {
-      "type": "oauth2",
-      "flow": "application",
-      "tokenUrl": "https://oauth.simple.api/token",
-      "scopes": {
-        "party:individual:full": "Full access to the party individual",
-        "party:individual:read": "Read access to the party individual",
-        "party:individual:write": "Write access (excluding delete) to the party individual",
-        "party:individual:delete": "Can delete party individual",
-        "giga:cga:all-area-access": "General Access Scope for Giga"
-      }
-    }
-  },
-  "paths": {
-    "/individual": {
-      "post": {
-        "security": [
-          {
-            "OauthSecurity": [
-              "party:individual:full",
-              "party:individual:write",
-              "giga:cga:all-area-access"
-            ]
-          }
-        ],
-        "operationId": "createIndividual",
-        "summary": "Creates a Individual",
-        "description": "This operation creates a Individual entity.",
-        "tags": [
-          "individual"
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "$ref": "#/definitions/Individual_Create"
-            },
-            "required": true,
-            "in": "body",
-            "name": "individual",
-            "description": "The Individual to be created"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/Individual"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "405": {
-            "description": "Method Not allowed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
-    "/individual/{id}": {
-      "get": {
-        "security": [
-          {
-            "OauthSecurity": [
-              "party:individual:full",
-              "party:individual:read",
-              "party:individual:write",
-              "giga:cga:all-area-access"
-            ]
-          }
-        ],
-        "operationId": "retrieveIndividual",
-        "summary": "Retrieves a Individual by ID",
-        "description": "This operation retrieves a Individual entity. Attribute selection is enabled for all first level attributes.",
-        "tags": [
-          "individual"
-        ],
-        "parameters": [
-          {
-            "required": true,
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the Individual"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Individual"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "405": {
-            "description": "Method Not allowed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "patch": {
-        "security": [
-          {
-            "OauthSecurity": [
-              "party:individual:full",
-              "party:individual:write",
-              "giga:cga:all-area-access"
-            ]
-          }
-        ],
-        "operationId": "patchIndividual",
-        "summary": "Updates partially a Individual",
-        "description": "This operation updates partially a Individual entity.",
-        "tags": [
-          "individual"
-        ],
-        "parameters": [
-          {
-            "required": true,
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the Individual"
-          },
-          {
-            "schema": {
-              "$ref": "#/definitions/Individual_Update"
-            },
-            "required": true,
-            "in": "body",
-            "name": "individual",
-            "description": "The Individual to be updated"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated",
-            "schema": {
-              "$ref": "#/definitions/Individual"
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "405": {
-            "description": "Method Not allowed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      },
-      "delete": {
-        "security": [
-          {
-            "OauthSecurity": [
-              "party:individual:full",
-              "party:individual:delete",
-              "giga:cga:all-area-access"
-            ]
-          }
-        ],
-        "operationId": "deleteIndividual",
-        "summary": "Deletes a Individual",
-        "description": "This operation deletes a Individual entity.",
-        "tags": [
-          "individual"
-        ],
-        "parameters": [
-          {
-            "required": true,
-            "type": "string",
-            "name": "id",
-            "in": "path",
-            "description": "Identifier of the Individual"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Deleted"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "405": {
-            "description": "Method Not allowed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "Any": {},
-    "Characteristic": {
-      "type": "object",
-      "description": "Describes a given characteristic of an object or entity through a name/value pair. In Giga we will use characterstic for special Attribut. When we want to create Individual that stay in Context of Organization, we will create Charactertis named organizationName, tradingName,organizationType.",
-      "required": [
-        "name",
-        "value"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the characteristic"
-        },
-        "valueType": {
-          "type": "string",
-          "description": "Data type of the value of the characteristic"
-        },
-        "value": {
-          "$ref": "#/definitions/Any",
-          "description": "The value of the characteristic"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        }
-      }
-    },
-    "ContactMedium": {
-      "type": "object",
-      "description": "Indicates the contact medium that could be used to contact the party.",
-      "properties": {
-        "mediumType": {
-          "type": "string",
-          "description": "Type of the contact medium, such as: email address, telephone number, postal address",
-          "enum": [
-            "EMAIL",
-            "FIXED_LINE",
-            "MOBILE",
-            "ADDRESS",
-            "SOCIAL",
-            "FAX"
-          ]
-        },
-        "mediumVerified": {
-          "type": "boolean",
-          "description": "Used in case that medium is valid or active"
-        },
-        "preferred": {
-          "type": "boolean",
-          "description": "If true, indicates that is the preferred contact medium"
-        },
-        "characteristic": {
-          "$ref": "#/definitions/MediumCharacteristic",
-          "description": "Any additional characteristic(s) of this contact medium"
-        },
-        "validFor": {
-          "$ref": "#/definitions/TimePeriod",
-          "description": "The time period that the contact medium is valid for"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        }
-      }
-    },
-    "EntityRef": {
-      "type": "object",
-      "description": "Entity reference schema to be use for all entityRef class.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of a related entity."
-        },
-        "href": {
-          "type": "string",
-          "description": "Reference of the related entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the related entity."
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        },
-        "@referredType": {
-          "type": "string",
-          "description": "The actual type of the target instance when needed for disambiguation."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "ExternalReference": {
-      "type": "object",
-      "description": "External reference of the individual or reference in other system",
-      "properties": {
-        "externalReferenceType": {
-          "type": "string",
-          "description": "Type of the external reference"
-        },
-        "name": {
-          "type": "string",
-          "description": "External reference name"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        }
-      }
-    },
-    "Individual": {
-      "type": "object",
-      "description": "Individual represents a single human being (a man, woman or child). The individual can be a customer, an employee or any other person that the organization needs to store information about.",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of the organization"
-        },
-        "href": {
-          "type": "string",
-          "description": "Hyperlink to access the organization"
-        },
-        "aristocraticTitle": {
-          "type": "string",
-          "description": "e.g. Baron, Graf, Earl,…"
-        },
-        "birthDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Birth date"
-        },
-        "countryOfBirth": {
-          "type": "string",
-          "description": "Country where the individual was born"
-        },
-        "deathDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date of death"
-        },
-        "familyName": {
-          "type": "string",
-          "description": "Contains the non-chosen or inherited name. Also known as last name in the Western context"
-        },
-        "familyNamePrefix": {
-          "type": "string",
-          "description": "Family name prefix"
-        },
-        "formattedName": {
-          "type": "string",
-          "description": "A fully formatted name in one string with all of its pieces in their proper place and all of the necessary punctuation. Useful for specific contexts (Chinese, Japanese, Korean,…)"
-        },
-        "fullName": {
-          "type": "string",
-          "description": "Full name flatten (first, middle, and last names)"
-        },
-        "gender": {
-          "type": "string",
-          "description": "Gender"
-        },
-        "generation": {
-          "type": "string",
-          "description": "e.g.. Sr, Jr, III (the third),…"
-        },
-        "givenName": {
-          "type": "string",
-          "description": "First name of the individual"
-        },
-        "legalName": {
-          "type": "string",
-          "description": "Legal name or birth name (name one has for official purposes)"
-        },
-        "location": {
-          "type": "string",
-          "description": "Temporary current location od the individual (may be used if the individual has approved its sharing)"
-        },
-        "maritalStatus": {
-          "type": "string",
-          "description": "Marital status (married, divorced, widow ...)"
-        },
-        "middleName": {
-          "type": "string",
-          "description": "Middles name or initial"
-        },
-        "nationality": {
-          "type": "string",
-          "description": "Nationality"
-        },
-        "placeOfBirth": {
-          "type": "string",
-          "description": "Reference to the place where the individual was born"
-        },
-        "preferredGivenName": {
-          "type": "string",
-          "description": "Contains the chosen name by which the individual prefers to be addressed. Note: This name may be a name other than a given name, such as a nickname"
-        },
-        "title": {
-          "type": "string",
-          "description": "Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ..."
-        },
-        "contactMedium": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContactMedium"
-          }
-        },
-        "externalReference": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExternalReference"
-          }
-        },
-        "otherName": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OtherNameIndividual"
-          }
-        },
-        "partyCharacteristic": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Characteristic"
-          }
-        },
-        "relatedParty": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RelatedParty"
-          }
-        },
-        "skill": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Skill"
-          }
-        },
-        "status": {
-          "$ref": "#/definitions/IndividualStateType",
-          "description": "Status of the individual"
-        }
-      }
-    },
-    "Individual_Create": {
-      "type": "object",
-      "description": "Individual represents a single human being (a man, woman or child). The individual can be a customer, an employee or any other person that the organization needs to store information about.\nSkipped properties: id,href",
-      "required": [
-        "givenName",
-        "familyName"
-      ],
-      "properties": {
-        "aristocraticTitle": {
-          "type": "string",
-          "description": "e.g. Baron, Graf, Earl,…"
-        },
-        "birthDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Birth date"
-        },
-        "countryOfBirth": {
-          "type": "string",
-          "description": "Country where the individual was born"
-        },
-        "deathDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date of death"
-        },
-        "familyName": {
-          "type": "string",
-          "description": "Contains the non-chosen or inherited name. Also known as last name in the Western context"
-        },
-        "familyNamePrefix": {
-          "type": "string",
-          "description": "Family name prefix"
-        },
-        "formattedName": {
-          "type": "string",
-          "description": "A fully formatted name in one string with all of its pieces in their proper place and all of the necessary punctuation. Useful for specific contexts (Chinese, Japanese, Korean,…)"
-        },
-        "fullName": {
-          "type": "string",
-          "description": "Full name flatten (first, middle, and last names)"
-        },
-        "gender": {
-          "type": "string",
-          "description": "Gender"
-        },
-        "generation": {
-          "type": "string",
-          "description": "e.g.. Sr, Jr, III (the third),…"
-        },
-        "givenName": {
-          "type": "string",
-          "description": "First name of the individual"
-        },
-        "legalName": {
-          "type": "string",
-          "description": "Legal name or birth name (name one has for official purposes)"
-        },
-        "location": {
-          "type": "string",
-          "description": "Temporary current location od the individual (may be used if the individual has approved its sharing)"
-        },
-        "maritalStatus": {
-          "type": "string",
-          "description": "Marital status (married, divorced, widow ...)"
-        },
-        "middleName": {
-          "type": "string",
-          "description": "Middles name or initial"
-        },
-        "nationality": {
-          "type": "string",
-          "description": "Nationality"
-        },
-        "placeOfBirth": {
-          "type": "string",
-          "description": "Reference to the place where the individual was born"
-        },
-        "preferredGivenName": {
-          "type": "string",
-          "description": "Contains the chosen name by which the individual prefers to be addressed. Note: This name may be a name other than a given name, such as a nickname"
-        },
-        "title": {
-          "type": "string",
-          "description": "Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ..."
-        },
-        "contactMedium": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContactMedium"
-          }
-        },
-        "externalReference": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExternalReference"
-          }
-        },
-        "otherName": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OtherNameIndividual"
-          }
-        },
-        "partyCharacteristic": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Characteristic"
-          }
-        },
-        "relatedParty": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RelatedParty"
-          }
-        },
-        "skill": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Skill"
-          }
-        },
-        "status": {
-          "$ref": "#/definitions/IndividualStateType",
-          "description": "Status of the individual"
-        }
-      }
-    },
-    "Individual_Update": {
-      "type": "object",
-      "description": "Individual represents a single human being (a man, woman or child). The individual can be a customer, an employee or any other person that the organization needs to store information about.\nSkipped properties: id,href",
-      "required": [
-        "id"
-      ],
-      "properties": {
-        "aristocraticTitle": {
-          "type": "string",
-          "description": "e.g. Baron, Graf, Earl,…"
-        },
-        "birthDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Birth date"
-        },
-        "countryOfBirth": {
-          "type": "string",
-          "description": "Country where the individual was born"
-        },
-        "deathDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date of death"
-        },
-        "familyName": {
-          "type": "string",
-          "description": "Contains the non-chosen or inherited name. Also known as last name in the Western context"
-        },
-        "familyNamePrefix": {
-          "type": "string",
-          "description": "Family name prefix"
-        },
-        "formattedName": {
-          "type": "string",
-          "description": "A fully formatted name in one string with all of its pieces in their proper place and all of the necessary punctuation. Useful for specific contexts (Chinese, Japanese, Korean,…)"
-        },
-        "fullName": {
-          "type": "string",
-          "description": "Full name flatten (first, middle, and last names)"
-        },
-        "gender": {
-          "type": "string",
-          "description": "Gender"
-        },
-        "generation": {
-          "type": "string",
-          "description": "e.g.. Sr, Jr, III (the third),…"
-        },
-        "givenName": {
-          "type": "string",
-          "description": "First name of the individual"
-        },
-        "legalName": {
-          "type": "string",
-          "description": "Legal name or birth name (name one has for official purposes)"
-        },
-        "location": {
-          "type": "string",
-          "description": "Temporary current location od the individual (may be used if the individual has approved its sharing)"
-        },
-        "maritalStatus": {
-          "type": "string",
-          "description": "Marital status (married, divorced, widow ...)"
-        },
-        "middleName": {
-          "type": "string",
-          "description": "Middles name or initial"
-        },
-        "nationality": {
-          "type": "string",
-          "description": "Nationality"
-        },
-        "placeOfBirth": {
-          "type": "string",
-          "description": "Reference to the place where the individual was born"
-        },
-        "preferredGivenName": {
-          "type": "string",
-          "description": "Contains the chosen name by which the individual prefers to be addressed. Note: This name may be a name other than a given name, such as a nickname"
-        },
-        "title": {
-          "type": "string",
-          "description": "Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ..."
-        },
-        "contactMedium": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ContactMedium"
-          }
-        },
-        "externalReference": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ExternalReference"
-          }
-        },
-        "otherName": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OtherNameIndividual"
-          }
-        },
-        "partyCharacteristic": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Characteristic"
-          }
-        },
-        "relatedParty": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RelatedParty"
-          }
-        },
-        "skill": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Skill"
-          }
-        },
-        "status": {
-          "$ref": "#/definitions/IndividualStateType",
-          "description": "Status of the individual"
-        }
-      }
-    },
-    "IndividualStateType": {
-      "type": "string",
-      "description": "Valid values for the lifecycle state of the individual",
-      "enum": [
-        "initialized",
-        "validated",
-        "deceaded"
-      ]
-    },
-    "MediumCharacteristic": {
-      "type": "object",
-      "description": "Describes the contact medium characteristics that could be used to contact a party (an individual or an organization)",
-      "properties": {
-        "city": {
-          "type": "string",
-          "description": "The city"
-        },
-        "contactType": {
-          "type": "string",
-          "description": "The type of contact, for example: phone number such as mobile, fixed home, fixed office. postal address such as shipping instalation…"
-        },
-        "country": {
-          "type": "string",
-          "description": "The country"
-        },
-        "emailAddress": {
-          "type": "string",
-          "pattern": "^[A-Za-z0-9]+[\\._-]?[A-Za-z0-9]+[@]\\w+[.]\\w{2,3}$",
-          "description": "Full email address in standard format. See regular exprssion. This should describe Checker for validating EMail Addresse."
-        },
-        "faxNumber": {
-          "type": "string",
-          "description": "The fax number of the contact"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "The primary phone number of the contact"
-        },
-        "postCode": {
-          "type": "string",
-          "description": "Postcode"
-        },
-        "socialNetworkId": {
-          "type": "string",
-          "description": "Identifier as a member of a social network"
-        },
-        "stateOrProvince": {
-          "type": "string",
-          "description": "State or province"
-        },
-        "street1": {
-          "type": "string",
-          "description": "Describes the street"
-        },
-        "houseNumber": {
-          "type": "string",
-          "description": "Describes the number of building from street1"
-        },
-        "houseNumberAppendix": {
-          "type": "string",
-          "description": "Describes the appendix of building from street1"
-        },
-        "street2": {
-          "type": "string",
-          "description": "Complementary street description"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        }
-      }
-    },
-    "OtherNameIndividual": {
-      "type": "object",
-      "description": "Keeps track of other names, for example the old name of a woman before marriage or an artist name.",
-      "properties": {
-        "aristocraticTitle": {
-          "type": "string",
-          "description": "e.g. Baron, Graf, Earl,…"
-        },
-        "familyName": {
-          "type": "string",
-          "description": "Contains the non-chosen or inherited name. Also known as last name in the Western context"
-        },
-        "familyNamePrefix": {
-          "type": "string",
-          "description": "Family name prefix"
-        },
-        "formattedName": {
-          "type": "string",
-          "description": ". A fully formatted name in one string with all of its pieces in their proper place and all of the necessary punctuation. Useful for specific contexts (Chinese, Japanese, Korean,…)"
-        },
-        "fullName": {
-          "type": "string",
-          "description": "Full name flatten (first, middle, and last names)"
-        },
-        "generation": {
-          "type": "string",
-          "description": "e.g. Sr, Jr…"
-        },
-        "givenName": {
-          "type": "string",
-          "description": "First name"
-        },
-        "legalName": {
-          "type": "string",
-          "description": "Legal name or birth name (name one has for official purposes)"
-        },
-        "middleName": {
-          "type": "string",
-          "description": "Middle name or initial"
-        },
-        "preferredGivenName": {
-          "type": "string",
-          "description": "Contains the chosen name by which the person prefers to be addressed. Note: This name may be a name other than a given name, such as a nickname"
-        },
-        "title": {
-          "type": "string",
-          "description": "Use for titles (aristrocatic, social, ...): Pr, Dr, Sir,...."
-        },
-        "validFor": {
-          "$ref": "#/definitions/TimePeriod"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        }
-      }
-    },
-    "RelatedParty": {
-      "type": "object",
-      "description": "Related Entity reference. A related party defines party or party role linked to a specific entity.",
-      "required": [
-        "@referredType",
-        "id"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of a related entity."
-        },
-        "href": {
-          "type": "string",
-          "description": "Reference of the related entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the related entity."
-        },
-        "role": {
-          "type": "string",
-          "description": "Role played by the related party"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        },
-        "@referredType": {
-          "type": "string",
-          "description": "The actual type of the target instance when needed for disambiguation."
-        }
-      }
-    },
-    "Skill": {
-      "type": "object",
-      "description": "Skills evaluated for an individual with a level and possibly with a limited validity when an obsolescence is defined (Ex: the first-aid certificate first level is limited to one year and an update training is required each year to keep the level).",
-      "properties": {
-        "comment": {
-          "type": "string",
-          "description": "A free text comment linked to the evaluation done"
-        },
-        "evaluatedLevel": {
-          "type": "string",
-          "description": "Level of expertise in a skill evaluated for an individual"
-        },
-        "skillCode": {
-          "type": "string",
-          "description": "Code of the skill"
-        },
-        "skillName": {
-          "type": "string",
-          "description": "Name of the skill such as Java language,…"
-        },
-        "validFor": {
-          "$ref": "#/definitions/TimePeriod"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class"
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name"
-        }
-      }
-    },
-    "TimePeriod": {
-      "type": "object",
-      "description": "A period of time, either as a deadline (endDateTime only) a startDateTime only, or both",
-      "properties": {
-        "endDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End of the time period, using IETC-RFC-3339 format"
-        },
-        "startDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start of the time period, using IETC-RFC-3339 format. If you define a start, you must also define an end"
-        }
-      }
-    },
-    "Error": {
-      "required": [
-        "code",
-        "reason"
-      ],
-      "type": "object",
-      "description": "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Application relevant detail, defined in the API or a common list."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Explanation of the reason for the error which can be shown to a client user."
-        },
-        "message": {
-          "type": "string",
-          "description": "More details and corrective actions related to the error which can be shown to a client user."
-        },
-        "status": {
-          "type": "string",
-          "description": "HTTP Error code extension"
-        },
-        "referenceError": {
-          "type": "string",
-          "description": "URI of documentation describing the error.",
-          "format": "uri"
-        },
-        "@baseType": {
-          "type": "string",
-          "description": "When sub-classing, this defines the super-class."
-        },
-        "@schemaLocation": {
-          "type": "string",
-          "description": "A URI to a JSON-Schema file that defines additional attributes and relationships",
-          "format": "uri"
-        },
-        "@type": {
-          "type": "string",
-          "description": "When sub-classing, this defines the sub-class entity name."
-        }
-      }
-    }
-  }
-}
+openapi: 3.0.0
+info:
+  title: API Party Individual in Giga
+  description: >-
+    ## TMF API Reference : TMF 632 - Party
+
+    ### Release : 19.0
+
+    The party API provides standardized mechanism for party management
+    such as creation, update, retrieval and deletion. Party Individual
+    has any kind of relation inside Fibre NetCo or InfCo.
+    Party is created to record individual information.
+    For example, within the context of a Creating non Connected Orders,
+    Party API allows creation of the Customer as an individual for later use
+    and processing. Consumer of that API should reference on an Individual with
+    the ID of the Individual. This is the Key that Consumer has to store in their Model.
+
+  version: 1.0.0
+tags:
+- name: PartyIndividual
+paths:
+  /party/v1/individual:
+    post:
+      security:
+      - OauthSecurity:
+        - party:individual:full
+        - party:individual:write
+        - giga:cga:all-area-access
+      operationId: createIndividual
+      summary: Creates a Individual
+      description: This operation creates a Individual entity.
+      tags:
+      - PartyIndividual
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/IndividualCreate"
+        description: The Individual to be created
+        required: true
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Individual"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+  "/party/v1/individual/{id}":
+    get:
+      security:
+      - OauthSecurity:
+        - party:individual:full
+        - party:individual:read
+        - party:individual:write
+        - giga:cga:all-area-access
+      operationId: retrieveIndividual
+      summary: Retrieves a Individual by ID
+      description: This operation retrieves a Individual entity. Attribute selection is
+        enabled for all first level attributes.
+      tags:
+      - PartyIndividual
+      parameters:
+      - required: true
+        name: id
+        in: path
+        description: Identifier of the Individual
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Individual"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    patch:
+      security:
+      - OauthSecurity:
+        - party:individual:full
+        - party:individual:write
+        - giga:cga:all-area-access
+      operationId: patchIndividual
+      summary: Updates partially a Individual
+      description: This operation updates partially a Individual entity.
+        Each nested attribute is defined by its own id. When body contains the attribute with existed id then attribute
+        will be updated, if given id is missed then attribute will be added. In case of deleting some attributes use
+        delete request. Patch is not supporting such functionality.
+      tags:
+      - PartyIndividual
+      parameters:
+      - required: true
+        name: id
+        in: path
+        description: Identifier of the Individual
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/IndividualUpdate"
+        description: The Individual to be updated
+        required: true
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/Individual"
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+    delete:
+      security:
+      - OauthSecurity:
+        - party:individual:full
+        - party:individual:delete
+        - giga:cga:all-area-access
+      operationId: deleteIndividual
+      summary: Deletes a Individual
+      description: This operation deletes a Individual entity.
+      tags:
+      - PartyIndividual
+      parameters:
+      - required: true
+        name: id
+        in: path
+        description: Identifier of the Individual
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Deleted
+        "400":
+          description: Bad Request
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "401":
+          description: Unauthorized
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "403":
+          description: Forbidden
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "404":
+          description: Not Found
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "409":
+          description: Conflict
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json;charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ProblemDetails"
+servers:
+- url: http://localhost:8559
+components:
+  securitySchemes:
+    OauthSecurity:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.simple.api/token
+          scopes:
+            party:individual:full: Full access to the party individual
+            party:individual:read: Read access to the party individual
+            party:individual:write: Write access (excluding delete) to the party individual
+            party:individual:delete: Can delete party individual
+            giga:cga:all-area-access: General Access Scope for Giga
+  schemas:
+    Characteristic:
+      type: object
+      description: Describes a given characteristic of an object or entity through a
+        name/value pair. In Giga we will use characterstic for special Attribut.
+        When we want to create Individual that stay in Context of Organization,
+        we will create Charactertis named organizationName,
+        tradingName,organizationType.
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Name of the characteristic. Must be unque.
+        valueType:
+          type: string
+          description: Data type of the value of the characteristic
+        value:
+          type: string
+          description: Value of the characteristic
+    ContactMedium:
+      type: object
+      description: Indicates the contact medium that could be used to contact the party.
+      properties:
+        mediumType:
+          type: string
+          description: "Type of the contact medium, such as: email address, telephone
+            number, postal address. For each individual each mediumType could be added only once."
+          enum:
+          - EMAIL
+          - FIXED_LINE
+          - MOBILE
+          - ADDRESS
+          - SOCIAL
+          - FAX
+        mediumVerified:
+          type: boolean
+          description: Used in case that medium is valid or active
+        preferred:
+          type: boolean
+          description: If true, indicates that is the preferred contact medium
+        characteristic:
+          $ref: "#/components/schemas/MediumCharacteristic"
+        validFor:
+          $ref: "#/components/schemas/TimePeriod"
+    IndividualBase:
+      type: object
+      description: Individual represents a single human being (a man, woman or child). The
+        individual can be a customer, an employee or any other person that the
+        organization needs to store information about.
+
+      properties:
+        aristocraticTitle:
+          type: string
+          description: e.g. Baron, Graf, Earl,…
+        birthDate:
+          type: string
+          format: date-time
+          description: Birth date
+        countryOfBirth:
+          type: string
+          description: Country where the individual was born
+        deathDate:
+          type: string
+          format: date-time
+          description: Date of death
+        familyName:
+          type: string
+          description: Contains the non-chosen or inherited name. Also known as last name
+            in the Western context
+        familyNamePrefix:
+          type: string
+          description: Family name prefix
+        formattedName:
+          type: string
+          description: A fully formatted name in one string with all of its pieces in their
+            proper place and all of the necessary punctuation. Useful for
+            specific contexts (Chinese, Japanese, Korean,…)
+        fullName:
+          type: string
+          description: Full name flatten (first, middle, and last names)
+        gender:
+          type: string
+          description: Gender
+        generation:
+          type: string
+          description: e.g.. Sr, Jr, III (the third),…
+        givenName:
+          type: string
+          description: First name of the individual
+        legalName:
+          type: string
+          description: Legal name or birth name (name one has for official purposes)
+        location:
+          type: string
+          description: Temporary current location od the individual (may be used if the
+            individual has approved its sharing)
+        maritalStatus:
+          type: string
+          description: Marital status (married, divorced, widow ...)
+        middleName:
+          type: string
+          description: Middles name or initial
+        nationality:
+          type: string
+          description: Nationality
+        placeOfBirth:
+          type: string
+          description: Reference to the place where the individual was born
+        preferredGivenName:
+          type: string
+          description: "Contains the chosen name by which the individual prefers to be
+            addressed. Note: This name may be a name other than a given name,
+            such as a nickname"
+        title:
+          type: string
+          description: Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ...
+        contactMedium:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContactMedium"
+        partyCharacteristic:
+          type: array
+          items:
+            $ref: "#/components/schemas/Characteristic"
+        relatedParty:
+          type: array
+          items:
+            $ref: "#/components/schemas/RelatedParty"
+        status:
+          $ref: "#/components/schemas/IndividualStateType"
+
+    Individual:
+      allOf:
+      - $ref: "#/components/schemas/IndividualBase"
+      - type: object
+        required:
+        - id
+        properties:
+          id:
+            type: string
+            description: Unique identifier of the organization. Numbers are expected.
+            example: "1000"
+          href:
+            type: string
+            description: Hyperlink to access the organization
+
+    IndividualUpdate:
+      allOf:
+      - $ref: "#/components/schemas/IndividualBase"
+      - type: object
+        description: >-
+          Individual represents a single human being (a man, woman or child). The
+          individual can be a customer, an employee or any other person that the
+          organization needs to store information about. Updated by id.
+
+          Skipped properties: id,href
+        required:
+        - id
+
+    IndividualCreate:
+      allOf:
+      - $ref: "#/components/schemas/IndividualBase"
+      - type: object
+        description: >-
+          Individual represents a single human being (a man, woman or child). The
+          individual can be a customer, an employee or any other person that the
+          organization needs to store information about.
+
+          Skipped properties: id,href
+        required:
+        - givenName
+        - familyName
+
+    IndividualStateType:
+      type: string
+      description: Valid values for the lifecycle state of the individual
+      enum:
+      - initialized
+      - validated
+      - deceaded
+    MediumCharacteristic:
+      type: object
+      description: Describes the contact medium characteristics that could be used to
+        contact a party (an individual or an organization)
+      properties:
+        city:
+          type: string
+          description: The city
+        contactType:
+          type: string
+          description: "The type of contact, for example: phone number such as mobile,
+            fixed home, fixed office. postal address such as shipping
+            instalation…"
+        country:
+          type: string
+          description: The country
+        emailAddress:
+          type: string
+          pattern: ^[A-Za-z0-9]+[\._-]?[A-Za-z0-9]+[@]\w+[.]\w{2,3}$
+          description: Full email address in standard format. See regular exprssion. This
+            should describe Checker for valid EMail Addresse.
+        faxNumber:
+          type: string
+          description: The fax number of the contact
+        phoneNumber:
+          type: string
+          description: The primary phone number of the contact
+        postCode:
+          type: string
+          description: Postcode
+        socialNetworkId:
+          type: string
+          description: Identifier as a member of a social network
+        stateOrProvince:
+          type: string
+          description: State or province
+        street1:
+          type: string
+          description: Describes the street
+        houseNumber:
+          type: string
+          description: Describes the number of building from street1
+        houseNumberAppendix:
+          type: string
+          description: Describes the appendix of building from street1
+        street2:
+          type: string
+          description: Complementary street description
+    RelatedParty:
+      type: object
+      description: Related Entity reference. A related party defines party or party role
+        linked to a specific entity.
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: Unique identifier of a related entity.
+        href:
+          type: string
+          description: Reference of the related entity.
+        name:
+          type: string
+          description: Name of the related entity.
+        role:
+          type: string
+          description: Role played by the related party
+    TimePeriod:
+      type: object
+      description: A period of time, either as a deadline (endDateTime only) a
+        startDateTime only, or both
+      properties:
+        endDateTime:
+          type: string
+          format: date-time
+          description: End of the time period, using IETC-RFC-3339 format
+        startDateTime:
+          type: string
+          format: date-time
+          description: Start of the time period, using IETC-RFC-3339 format. If you define
+            a start, you must also define an end
+
+    ProblemDetails:
+      type: object
+      required:
+      - title
+      - type
+      properties:
+        type:
+          type: string
+          format: uri
+          description: type
+        title:
+          type: string
+          description: title
+        status:
+          type: integer
+          format: int32
+          description: status
+        detail:
+          type: string
+          description: detail
+        instance:
+          type: string
+          description: instance
+        embedded:
+          $ref: "#/components/schemas/SpecificProblemDetails"
+      description: Error response of 4xx and 5xx http statuses.
+
+    SpecificProblemDetails:
+      type: object
+      required:
+      - code
+      - reason
+      properties:
+        code:
+          type: string
+          description: code
+        reason:
+          type: string
+          description: reason
+        message:
+          type: string
+          description: message
+        status:
+          type: integer
+          format: int32
+          description: status
+      description: Specific problem details(including fehlerbuildnummer code).

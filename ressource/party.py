@@ -11,19 +11,18 @@ from model.individual import Individual
 from model.characteristic import Characterstic
 from model.contact_medium import ContactMedium
 from model.relatedparty import RelatedParty
-from model.othername import OtherName
-from model.skill import Skill
-from model.externalreference import ExternalReference
 
 from schemas.Individual import IndividualSchema, IndivtoTMF
 from schemas.medium import MediumSchema
 from schemas.characteristic import CharacteristicSchema
+from schemas.relatedParty import RelatedPartySchema
 from tmf_errors import errorFormaterMarshmallow
 
 Individual_Schema = IndividualSchema()
 IndivTMF632_Schema= IndivtoTMF()
 Medium_Schema = MediumSchema()
 Characteristic_Schema = CharacteristicSchema()
+RelatedParty_Schema = RelatedPartySchema()
 
 def load_json(json_data):
     output_dict = {}
@@ -48,7 +47,7 @@ class Party(Resource):
         try:
             json_data = request.get_json()
         except:
-            return errorFormaterMarshmallow(400, 'Validation errors', errors), HTTPStatus.BAD_REQUEST
+            return errorFormaterMarshmallow(400, 'Validation errors'), HTTPStatus.BAD_REQUEST
 
         #Take root Values for class Individual from requested Json
         indivJson=load_json(json_data)
@@ -66,6 +65,13 @@ class Party(Resource):
             characteristic_exist= True
         except:
             characteristic_exist= False
+
+        # Ckeck if thers is Characteristic
+        try:
+            relPartyJson = json_data['relatedParty']
+            relParty_exist = True
+        except:
+            relParty_exist = False
 
         #check Json for Individual
         try:
@@ -102,7 +108,19 @@ class Party(Resource):
                 except ValidationError as errors:
                     partyIndiv.delete()
                     return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
-
+        
+        if relParty_exist:
+            # it could be that there are more then one relParty existent
+            for rel in relPartyJson:
+                rel= load_json(rel)
+                try:
+                    dataM = RelatedParty_Schema.load(data=rel)
+                    relParty= RelatedParty(**dataM)
+                    relParty.fk_idIndiv = partyIndiv.id
+                    relParty.save()
+                except ValidationError as errors:
+                    partyIndiv.delete()
+                    return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
 
         partyIndiv = Individual.get_by_id(partyIndiv.id)
 
