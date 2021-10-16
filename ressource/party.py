@@ -49,40 +49,17 @@ class Party(Resource):
         except:
             return errorFormaterMarshmallow(400, 'Validation errors'), HTTPStatus.BAD_REQUEST
 
-        #Take root Values for class Individual from requested Json
-        indivJson=load_json(json_data)
-
-        #Ckeck if thers is ContactMedium
-        try:
-            mediumJson = json_data['contactMedium']
-            contact_exist= True
-        except:
-            contact_exist= False
-
-        #Ckeck if thers is Characteristic
-        try:
-            CharJson = json_data['partyCharacteristic']
-            characteristic_exist= True
-        except:
-            characteristic_exist= False
-
-        # Ckeck if thers is Characteristic
-        try:
-            relPartyJson = json_data['relatedParty']
-            relParty_exist = True
-        except:
-            relParty_exist = False
-
-        #check Json for Individual
+        indivJson= catch_Json(json_data, 'root')
+        # check Json for Individual
         try:
             data = Individual_Schema.load(data=indivJson)
             partyIndiv = Individual(**data)
             partyIndiv.save()
-
         except ValidationError as errors:
             return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
 
-        if contact_exist:
+        mediumJson = catch_Json(json_data, 'medium')
+        if mediumJson:
             #it could be that we have more then one Contact
             for m in mediumJson:
                 # Make Contact Medium flat (without dictionary Characterstic and valid)
@@ -96,7 +73,8 @@ class Party(Resource):
                     partyIndiv.delete()
                     return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
 
-        if characteristic_exist:
+        CharJson = catch_Json(json_data, 'character')
+        if CharJson:
             # it could be that we have more then one characteristic
             for ch in CharJson:
                 character = load_json(ch)
@@ -108,8 +86,9 @@ class Party(Resource):
                 except ValidationError as errors:
                     partyIndiv.delete()
                     return errorFormaterMarshmallow(400,'Validation errors',errors), HTTPStatus.BAD_REQUEST
-        
-        if relParty_exist:
+
+        relPartyJson = catch_Json(json_data, 'relparty')
+        if relPartyJson:
             # it could be that there are more then one relParty existent
             for rel in relPartyJson:
                 rel= load_json(rel)
@@ -146,3 +125,73 @@ class PartyId(Resource):
             return errorFormaterMarshmallow(400, 'Party not found'), HTTPStatus.NOT_FOUND
 
         return IndivTMF632_Schema.dump(partyIndiv), HTTPStatus.OK
+
+    @swag_from('TMF632PartyIndiv_V1.yml', endpoint='/individual/{id}', methods=['PATCH'])
+    def patch(self, id):
+        partyIndiv = Individual.get_by_id(indiv_id=id)
+        if partyIndiv is None:
+            return errorFormaterMarshmallow(400, 'Party not found'), HTTPStatus.NOT_FOUND
+
+        # check if request is well formed Json
+        try:
+            json_data = request.get_json()
+        except:
+            return errorFormaterMarshmallow(400, 'Validation errors'), HTTPStatus.BAD_REQUEST
+
+        indivJson = catch_Json(json_data, 'root')
+        # check Json for Individual
+        try:
+            data = Individual_Schema.load(data=indivJson)
+            partyIndiv = Individual(**data)
+            partyIndiv.save()
+            return IndivTMF632_Schema.dump(partyIndiv), HTTPStatus.OK
+        except ValidationError as errors:
+            return errorFormaterMarshmallow(400, 'Validation errors', errors), HTTPStatus.BAD_REQUEST
+
+'''        
+        
+        for key, value in json_data.items():
+            if not type(value) == list and not type(value) == dict:
+                if value is None:
+                    partyIndiv.key = ""
+                else:
+                    #print (type(partyIndiv))
+                    partyIndiv.key = value
+                    print (partyIndiv.key)
+
+        #partyIndiv.aristocraticTitle =json_data.get('aristocraticTitle') or partyIndiv.aristocraticTitle
+        #partyIndiv.familyName = json_data.get('familyName') or partyIndiv.familyName
+        #partyIndiv.givenName = json_data.get('givenName') or partyIndiv.givenName
+
+        partyIndiv.save()
+        return IndivTMF632_Schema.dump(partyIndiv), HTTPStatus.OK
+'''
+def catch_Json(json_data, part):
+
+    if part == "root":
+        # Take root Values for class Individual from requested Json
+        indivJson = load_json(json_data)
+        return  indivJson
+    # Ckeck if there is ContactMedium
+    elif part == "medium":
+        try:
+            mediumJson = json_data['contactMedium']
+            return mediumJson
+        except:
+            return {}
+    # Ckeck if there is Characteristic
+    elif part == "character":
+
+        try:
+            CharJson = json_data['partyCharacteristic']
+            return CharJson
+        except:
+            return {}
+    # Ckeck if there is relatedParty
+    elif part == "relparty":
+
+        try:
+            relPartyJson = json_data['relatedParty']
+            return relPartyJson
+        except:
+            return {}

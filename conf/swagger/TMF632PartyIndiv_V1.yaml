@@ -50,31 +50,31 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "401":
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "403":
           description: Forbidden
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "409":
           description: Conflict
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
   "/party/v1/individual/{id}":
     get:
       security:
@@ -108,37 +108,37 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "401":
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "403":
           description: Forbidden
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "404":
           description: Not Found
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "409":
           description: Conflict
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
     patch:
       security:
       - OauthSecurity:
@@ -179,37 +179,37 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "401":
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "403":
           description: Forbidden
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "404":
           description: Not Found
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "409":
           description: Conflict
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
     delete:
       security:
       - OauthSecurity:
@@ -236,37 +236,37 @@ paths:
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "401":
           description: Unauthorized
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "403":
           description: Forbidden
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "404":
           description: Not Found
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "409":
           description: Conflict
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
         "500":
           description: Internal Server Error
           content:
             application/json;charset=utf-8:
               schema:
-                $ref: "#/components/schemas/ProblemDetails"
+                $ref: "#/components/schemas/Error"
 servers:
 - url: http://localhost:8559
 components:
@@ -296,7 +296,7 @@ components:
       properties:
         name:
           type: string
-          description: Name of the characteristic. Must be unque.
+          description: Name of the characteristic. Must be unique.
         valueType:
           type: string
           description: Data type of the value of the characteristic
@@ -304,6 +304,8 @@ components:
           type: string
           description: Value of the characteristic
     ContactMedium:
+      required:
+      - mediumType
       type: object
       description: Indicates the contact medium that could be used to contact the party.
       properties:
@@ -428,7 +430,7 @@ components:
             example: "1000"
           href:
             type: string
-            description: Hyperlink to access the organization
+            description: Hyperlink to access the resource of party-individual
 
     IndividualUpdate:
       allOf:
@@ -463,7 +465,7 @@ components:
       enum:
       - initialized
       - validated
-      - deceaded
+      - deceased
     MediumCharacteristic:
       type: object
       description: Describes the contact medium characteristics that could be used to
@@ -476,15 +478,15 @@ components:
           type: string
           description: "The type of contact, for example: phone number such as mobile,
             fixed home, fixed office. postal address such as shipping
-            instalation…"
+            installation…"
         country:
           type: string
           description: The country
         emailAddress:
           type: string
-          pattern: ^[A-Za-z0-9]+[\._-]?[A-Za-z0-9]+[@]\w+[.]\w{2,3}$
           description: Full email address in standard format. See regular exprssion. This
             should describe Checker for valid EMail Addresse.
+          example: user.email@telekom.com
         faxNumber:
           type: string
           description: The fax number of the contact
@@ -545,51 +547,26 @@ components:
           format: date-time
           description: Start of the time period, using IETC-RFC-3339 format. If you define
             a start, you must also define an end
-
-    ProblemDetails:
-      type: object
+    Error:
       required:
-      - title
-      - type
-      properties:
-        type:
-          type: string
-          format: uri
-          description: type
-        title:
-          type: string
-          description: title
-        status:
-          type: integer
-          format: int32
-          description: status
-        detail:
-          type: string
-          description: detail
-        instance:
-          type: string
-          description: instance
-        embedded:
-          $ref: "#/components/schemas/SpecificProblemDetails"
-      description: Error response of 4xx and 5xx http statuses.
-
-    SpecificProblemDetails:
+        - code
+        - reason
       type: object
-      required:
-      - code
-      - reason
+      description: Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)
       properties:
         code:
           type: string
-          description: code
+          description: Application relevant detail, defined in the API or a common list.
         reason:
           type: string
-          description: reason
+          description: Explanation of the reason for the error which can be shown to a client user.
         message:
           type: string
-          description: message
+          description: More details and corrective actions related to the error which can be shown to a client user.
         status:
-          type: integer
-          format: int32
-          description: status
-      description: Specific problem details(including fehlerbuildnummer code).
+          type: string
+          description: HTTP Error code extension
+        referenceError:
+          type: string
+          description: URI of documentation describin
+          format: uri

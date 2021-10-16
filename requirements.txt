@@ -1,11 +1,11 @@
-Flask==1.1.4
+Flask
 Flask-RESTful
 flasgger
 Flask-SQLAlchemy
-Flask-Migrate==2.7.0
-psycopg2-binary==2.8.6
+Flask-Migrate
+#psycopg2-binary
 marshmallow
 jsons
 flask-cors
 Flask-Script
-werkzeug==1.0.1
+#werkzeug

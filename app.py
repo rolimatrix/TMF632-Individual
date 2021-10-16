@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask_restful import Api, Resource
 from flask_script import Manager
-from flask_script._compat import text_type
+#from flask_script._compat import text_type
 
 from flask_migrate import Migrate, MigrateCommand
 
@@ -61,4 +61,5 @@ def register_resources(app):
 
 if __name__ == "__main__":
     app = create_app()
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True)
+    #app.run(debug=True, host='0.0.0.0')
