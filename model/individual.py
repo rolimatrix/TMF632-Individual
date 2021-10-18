@@ -3,7 +3,7 @@ class Individual(db.Model):
     __tablename__ = 'individual'
 
     id = db.Column(db.BigInteger, primary_key=True)
-    status = db.Column(db.String(), nullable=False, default="initialized")
+    status = db.Column(db.String(), nullable=True, default="initialized")
     aristocraticTitle = db.Column(db.String(), nullable=True)
     birthDate = db.Column(db.String(), nullable=True)
     countryOfBirth = db.Column(db.String(), nullable=True)

@@ -9,7 +9,7 @@ class IndividualSchema(Schema):
         ordered = True
 
     id = fields.Integer(dump_only=True)
-    status = fields.String(required=True)
+    status = fields.String(required=False)
     aristocraticTitle = fields.String(required=False)
     birthDate = fields.String(required=False)
     countryOfBirth= fields.String(required=False)
@@ -34,6 +34,7 @@ class IndividualSchema(Schema):
     def validate_status(self, value):
         if value not in ['initialized', 'validated', 'deceased']:
             raise ValidationError('Invalid Status of PartyIndividual')
+
     @validates('familyName')
     def validate_familyName(self, value):
         if value =='':

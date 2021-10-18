@@ -12,4 +12,4 @@ class RelatedPartySchema(Schema):
     @validates('id')
     def validate_id(self, value):
        if value == '':
-          raise ValidationError("Related Party missing:  Id")
+          raise ValidationError("Related Party missing: Id")

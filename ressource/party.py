@@ -138,34 +138,24 @@ class PartyId(Resource):
         except:
             return errorFormaterMarshmallow(400, 'Validation errors'), HTTPStatus.BAD_REQUEST
 
-        indivJson = catch_Json(json_data, 'root')
-        # check Json for Individual
-        try:
-            data = Individual_Schema.load(data=indivJson)
-            partyIndiv = Individual(**data)
-            partyIndiv.save()
-            return IndivTMF632_Schema.dump(partyIndiv), HTTPStatus.OK
-        except ValidationError as errors:
-            return errorFormaterMarshmallow(400, 'Validation errors', errors), HTTPStatus.BAD_REQUEST
-
-'''        
-        
         for key, value in json_data.items():
+            print (key)
             if not type(value) == list and not type(value) == dict:
                 if value is None:
-                    partyIndiv.key = ""
+                    setattr(partyIndiv, key, None)
                 else:
-                    #print (type(partyIndiv))
-                    partyIndiv.key = value
-                    print (partyIndiv.key)
-
-        #partyIndiv.aristocraticTitle =json_data.get('aristocraticTitle') or partyIndiv.aristocraticTitle
-        #partyIndiv.familyName = json_data.get('familyName') or partyIndiv.familyName
-        #partyIndiv.givenName = json_data.get('givenName') or partyIndiv.givenName
+                    setattr(partyIndiv, key, value)
+            elif key == 'relatedParty':
+                relPartyJson = catch_Json(json_data, 'relparty')
+                for rel in relPartyJson:
+                    rel = load_json(rel)
+                    for relK, relV in rel.items():
+                        print (partyIndiv.relatedparty[0])
+                        setattr(partyIndiv, partyIndiv.relatedparty[0](relK), relV)
 
         partyIndiv.save()
         return IndivTMF632_Schema.dump(partyIndiv), HTTPStatus.OK
-'''
+
 def catch_Json(json_data, part):
 
     if part == "root":

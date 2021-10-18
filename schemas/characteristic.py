@@ -4,9 +4,9 @@ class CharacteristicSchema(Schema):
     class Meta:
         ordered = True
 
-    name = fields.String()
+    name = fields.String(required=True)
     valueType = fields.String(required=False)
-    value = fields.String()
+    value = fields.String(required=True)
 
     @validates('name')
     def validate_Name(self, value):

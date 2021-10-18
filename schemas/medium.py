@@ -6,7 +6,7 @@ class MediumSchema(Schema):
     class Meta:
         ordered = True
 
-    mediumType = fields.String()
+    mediumType = fields.String(required=True)
     preferred = fields.Boolean(required=False)
     mediumVerified= fields.Boolean(required=False)
     city = fields.String(required=False)
