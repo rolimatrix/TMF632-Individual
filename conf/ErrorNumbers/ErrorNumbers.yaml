@@ -1,0 +1,71 @@
+# Documentation of all Fehlerbildnummers at this microservice
+- Description:
+    name: party-management-individual
+    domain: party
+    developer: R.Schier/ Team Alf
+-00000001:
+    message: mediumType for contactMedium can only exist once per each party
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST
+    automation: no
+-00000002:
+    message: id for Related Party can only exist once per each party and must have valid Value
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST
+    automation: no
+-00000003:
+    message: name for partyCharacteristic can only exist once per each party
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST
+    automation: no
+-00000004:
+    message: mandatory Values for Individual Json not delivered
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST
+    automation: no
+-00000005:
+    message: Invalid not well formed Json
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST
+    automation: no
+-00000006:
+    message: validation for medium with error
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST or PATCH
+    automation: no
+-00000007:
+    message: validation for party Character with error
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST or PATCH
+    automation: no
+-00000008:
+    message: validation for related party Character with error
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP POST or PATCH
+    automation: no
+-00000009:
+    message: party ressource with this ID does not exist
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: ressource.party, on API EP GET, DELETE or PATCH
+    automation: no
+-00000010:
+    message: DB Init Error
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: app.py (main)
+    automation: no
+-00000011:
+    message: DB Create Error
+    rootcause: look on swagger Spec
+    severity: medium #minor / medium / major
+    implementation: app.py (main)
+    automation: no
