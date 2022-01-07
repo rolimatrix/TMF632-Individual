@@ -15,7 +15,7 @@ info:
     and processing. Consumer of that API should reference on an Individual with
     the ID of the Individual. This is the Key that Consumer has to store in their Model.
 
-  version: 1.0.0
+  version: 1.0.2
 tags:
 - name: PartyIndividual
 paths:

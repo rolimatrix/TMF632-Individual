@@ -1,3 +1,4 @@
+# coding=utf-8
 from marshmallow import Schema, fields, validates, ValidationError
 
 class CharacteristicSchema(Schema):
@@ -5,7 +6,7 @@ class CharacteristicSchema(Schema):
         ordered = True
 
     name = fields.String(required=True)
-    valueType = fields.String(required=False)
+    valueType = fields.String(required=False,allow_none=True)
     value = fields.String(required=True)
 
     @validates('name')

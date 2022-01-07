@@ -1,8 +1,11 @@
+# coding=utf-8
+import os
 from marshmallow import Schema, fields, validate, validates, ValidationError
 from schemas.medium import contMedtoTMF_Schema
 from schemas.characteristic import CharacteristicSchema
 from schemas.relatedParty import RelatedPartySchema
 from flask import request
+dbUSER=os.environ.get('SPRING_DATASOURCE_USERNAME')
 
 class IndividualSchema(Schema):
     class Meta:
@@ -10,25 +13,25 @@ class IndividualSchema(Schema):
 
     id = fields.Integer(dump_only=True)
     status = fields.String(required=False)
-    aristocraticTitle = fields.String(required=False)
-    birthDate = fields.String(required=False)
-    countryOfBirth= fields.String(required=False)
-    deathDate = fields.String(required=False)
-    familyName = fields.String()
-    givenName = fields.String()
-    familyNamePrefix = fields.String(required=False)
-    formattedName = fields.String(required=False)
-    fullName=fields.String(required=False)
-    gender=fields.String(required=False)
-    generation=fields.String(required=False)
-    legalName=fields.String(required=False)
-    location=fields.String(required=False)
-    maritalStatus=fields.String(required=False)
-    middleName=fields.String(required=False)
-    nationality=fields.String(required=False)
-    placeOfBirth=fields.String(required=False)
-    preferredGivenName=fields.String(required=False)
-    title=fields.String(required=False)
+    aristocraticTitle = fields.String(required=False,allow_none=True)
+    birthDate = fields.String(required=False,allow_none=True)
+    countryOfBirth= fields.String(required=False,allow_none=True)
+    deathDate = fields.String(required=False,allow_none=True)
+    familyName = fields.String(required=True)
+    givenName = fields.String(required=True)
+    familyNamePrefix = fields.String(required=False,allow_none=True)
+    formattedName = fields.String(required=False,allow_none=True)
+    fullName=fields.String(required=False,allow_none=True)
+    gender=fields.String(required=False,allow_none=True)
+    generation=fields.String(required=False,allow_none=True)
+    legalName=fields.String(required=False,allow_none=True)
+    location=fields.String(required=False,allow_none=True)
+    maritalStatus=fields.String(required=False,allow_none=True)
+    middleName=fields.String(required=False,allow_none=True)
+    nationality=fields.String(required=False,allow_none=True)
+    placeOfBirth=fields.String(required=False,allow_none=True)
+    preferredGivenName=fields.String(required=False,allow_none=True)
+    title=fields.String(required=False,allow_none=True)
 
     @validates('status')
     def validate_status(self, value):
@@ -72,9 +75,9 @@ class IndivtoTMF(Schema):
     placeOfBirth = fields.String(dump_only=True)
     preferredGivenName = fields.String(dump_only=True)
     title = fields.String(dump_only=True)
-    contactMedium = fields.Nested(contMedtoTMF_Schema, attribute='contactmedium',dump_only=True,many=True)
-    partyCharacteristic= fields.Nested(CharacteristicSchema, attribute='characteristic',dump_only=True,many=True)
-    relatedParty = fields.Nested(RelatedPartySchema, attribute='relatedparty', dump_only=True, many=True)
+    contactMedium = fields.Nested(contMedtoTMF_Schema, attribute="contactmedium",dump_only=True,many=True)
+    partyCharacteristic= fields.Nested(CharacteristicSchema, attribute="characteristic",dump_only=True,many=True)
+    relatedParty = fields.Nested(RelatedPartySchema, attribute="relatedparty", dump_only=True, many=True)
 
     def buildHref(self,partyIndiv):
         url = request.url

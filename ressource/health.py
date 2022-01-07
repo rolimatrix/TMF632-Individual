@@ -1,4 +1,4 @@
-from flask import request, current_app
+# coding=utf-8
 from flask_restful import Resource
 
 class Health(Resource):

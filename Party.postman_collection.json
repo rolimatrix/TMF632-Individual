@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d4426865-b84b-429e-a76e-b4f45a2497e1",
+		"_postman_id": "2fdfab3f-0b57-4eae-9ca1-356ad60676a0",
 		"name": "Party",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,20 +11,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/party/v1/individual/1",
-					"protocol": "http",
+					"raw": "{{url}}/party/v1/individual/22",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{url}}"
 					],
-					"port": "5000",
 					"path": [
 						"party",
 						"v1",
 						"individual",
-						"1"
+						"22"
 					],
 					"query": [
 						{
@@ -44,7 +39,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"aristocraticTitle\": null,\r\n  \"birthDate\": \"20.08.2021\",\r\n  \"countryOfBirth\": \"Germany\",\r\n  \"deathDate\": null,\r\n  \"familyName\": \"Schier\",\r\n  \"familyNamePrefix\": null,\r\n  \"formattedName\": \"Roland Schier\",\r\n  \"fullName\": null,\r\n  \"gender\": \"male\",\r\n  \"generation\": null,\r\n  \"givenName\": \"Roland\",\r\n  \"legalName\": null,\r\n  \"location\": null,\r\n  \"maritalStatus\": \"married\",\r\n  \"middleName\": null,\r\n  \"nationality\": \"German\",\r\n  \"placeOfBirth\": \"Münster\",\r\n  \"preferredGivenName\": null,\r\n  \"title\": \"Dipl. Ing.\",\r\n  \"status\": \"initialized\",\r\n  \"contactMedium\": [\r\n    {\r\n      \"mediumType\": \"ADDRESS\",\r\n      \"preferred\": true,\r\n      \"characteristic\": {\r\n        \"city\": \"Münster\",\r\n        \"country\": \"Germany\",\r\n        \"emailAddress\": null,\r\n        \"faxNumber\": null,\r\n        \"phoneNumber\": null,\r\n        \"postCode\": \"48165\",\r\n        \"socialNetworkId\": null,\r\n        \"stateOrProvince\": \"\",\r\n        \"street1\": \"Böttcherstr.\",\r\n        \"houseNumber\": \"107\",\r\n        \"houseNumberAppendix\": null,\r\n        \"street2\": \"\"\r\n      },\r\n      \"validFor\": {\r\n        \"endDateTime\": null,\r\n        \"startDateTime\": null\r\n      }\r\n    },\r\n    {\r\n      \"mediumType\": \"MOBILE\",\r\n      \"preferred\": false,\r\n      \"characteristic\": {\r\n        \"phoneNumber\": \"1605353657\"\r\n        },\r\n      \"validFor\": {\r\n        \"endDateTime\": null,\r\n        \"startDateTime\": null\r\n        }\r\n    },\r\n        {\r\n      \"mediumType\": \"EMAIL\",\r\n      \"preferred\": false,\r\n      \"characteristic\": {\r\n        \"emailAddress\": \"Roland.Schier@me.com\"\r\n        },\r\n      \"validFor\": {\r\n        \"endDateTime\": null,\r\n        \"startDateTime\": null\r\n        }\r\n    }\r\n  ],\r\n  \"partyCharacteristic\": [\r\n    {\r\n      \"name\": \"Role\",\r\n      \"valueType\": null,\r\n      \"value\": \"Landloard\"\r\n    },\r\n    {\r\n      \"name\": \"RoleType\",\r\n      \"valueType\": null,\r\n      \"value\": \"Teileigentümer\"\r\n    }\r\n  ],\r\n  \"relatedParty\": [\r\n    {\r\n      \"id\" : \"10007\",  \r\n      \"href\": null,\r\n      \"name\": \"PTI 31\",\r\n      \"role\": \"Rolloutpartner\"\r\n    }\r\n  ]\r\n}",
+					"raw": "{\r\n    \"aristocraticTitle\": null,\r\n    \"birthDate\": \"10.10.2001\",\r\n    \"countryOfBirth\": \"Polen\",\r\n    \"deathDate\": null,\r\n    \"familyName\": \"Schier\",\r\n    \"familyNamePrefix\": \"Loard\",\r\n    \"formattedName\": \"Max Muster\",\r\n    \"fullName\": \"Max Mustermann\",\r\n    \"gender\": \"male\",\r\n    \"generation\": \"zero\",\r\n    \"givenName\": \"Michal\",\r\n    \"legalName\": null,\r\n    \"location\": \"Germany\",\r\n    \"maritalStatus\": \"married\",\r\n    \"middleName\": null,\r\n    \"nationality\": \"German\",\r\n    \"placeOfBirth\": \"Musterstadt\",\r\n    \"preferredGivenName\": null,\r\n    \"title\": \"Dipl. Ing.\",\r\n    \"status\": \"initialized\",\r\n    \"contactMedium\": [\r\n        {\r\n            \"mediumType\": \"ADDRESS\",\r\n            \"mediumVerified\": true,\r\n            \"preferred\": true,\r\n            \"characteristic\": {\r\n                \"city\": \"München\",\r\n                \"country\": \"Germany\",\r\n                \"postCode\": \"81673\",\r\n                \"stateOrProvince\": \"\",\r\n                \"street1\": \"Musterstrasse\",\r\n                \"houseNumber\": \"1234\"               \r\n                \r\n            },\r\n            \"validFor\": {\r\n                \"endDateTime\": \"31.12.2021\",\r\n                \"startDateTime\": \"1.1.2021\"\r\n            }\r\n        },\r\n        {\r\n            \"mediumType\": \"MOBILE\",\r\n            \"preferred\": false,\r\n            \"characteristic\": {\r\n                \"contactType\": null,\r\n                \"phoneNumber\": \"01607458643\"\r\n            }\r\n        }],\r\n    \"partyCharacteristic\": [\r\n        {\r\n            \"name\":\"FCB\",\r\n            \"value\": \"Gott\"\r\n        },\r\n        {\r\n            \"name\": \"RoleT\",\r\n            \"valueType\": \"Text\",\r\n            \"value\": \"Gott\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"id\": \"10000\",\r\n            \"name\": \"Architecturbüro\",\r\n            \"role\": \"EXPERT\"\r\n  \r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -52,12 +47,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/party/v1/individual",
-					"protocol": "http",
+					"raw": "{{url}}/party/v1/individual",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "5000",
 					"path": [
 						"party",
 						"v1",
@@ -73,17 +66,15 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/party/v1/individual/1",
-					"protocol": "http",
+					"raw": "{{url}}/party/v1/individual/19",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "5000",
 					"path": [
 						"party",
 						"v1",
 						"individual",
-						"1"
+						"19"
 					]
 				}
 			},
@@ -95,18 +86,48 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/actuator/health",
-					"protocol": "http",
+					"raw": "{{url}}/actuator/health",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"{{url}}"
 					],
-					"port": "5000",
 					"path": [
 						"actuator",
 						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"initialized\",\r\n    \"aristocraticTitle\": \"Dr.\",\r\n    \"birthDate\": \"10.10.2001\",\r\n    \"countryOfBirth\": \"Polen\",\r\n    \"deathDate\": \"nicht definiert\",\r\n    \"familyName\": \"Schier\",\r\n    \"givenName\": \"Roland\",\r\n    \"familyNamePrefix\": \"Loard\",\r\n    \"formattedName\": \"Max Muster\",\r\n    \"fullName\": \"Max Mustermann\",\r\n    \"gender\": \"male\",\r\n    \"generation\": \"zero\",\r\n    \"legalName\": \"null\",\r\n    \"location\": \"Germany\",\r\n    \"maritalStatus\": \"married\",\r\n    \"middleName\": \"Middle\",\r\n    \"nationality\": \"German\",\r\n    \"placeOfBirth\": \"Musterstadt\",\r\n    \"preferredGivenName\": \"keiner\",\r\n    \"title\": \"Dipl. Ing\",\r\n  \r\n    \"partyCharacteristic\": [\r\n        {\r\n            \"name\": null,\r\n            \"valueType\": \"String\",\r\n            \"value\": \"HalbGott\"\r\n        },\r\n        {\r\n            \"name\": \"FCB\",\r\n            \"valueType\": \"Text\",\r\n            \"value\": \"Anfänger\"\r\n        }\r\n    ],\r\n    \"relatedParty\": [\r\n        {\r\n            \"id\": \"103090\",\r\n            \"href\": null,\r\n            \"name\": \"Architecturbuero\",\r\n            \"role\": \"EXPERT\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/party/v1/individual/33",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"party",
+						"v1",
+						"individual",
+						"33"
 					]
 				}
 			},

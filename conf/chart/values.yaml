@@ -1,7 +1,50 @@
-app_name: &app_name_definition "svc-zero-ikutuzov"
+app_name: &app_name_definition "party-management-individual"
+
+db_tempalte: &db_definition
+  db_name: "party_management_individual"
+  username: "party_management_individual"
+  password: "party_management_individual"
+  admin_password: "postgres"
+  external_svc_name: "postgresql-doss"
 
 app:
+  env:
+    params:
+      FBNRPREFIX: "80083230"
+    inject_maps:
+      - "apigw-endpoints"
+      - "rhsso-endpoints"
+      - "environment-descriptor"
+  sidecar:
+    env:
+      M2M_PATH_EXCLUDE: '{{ .Values.health.url }}, /apidocs/**,{{ .Values.prometheus.path }}'
   enable_apm_upload_job: false
   name: *app_name_definition
+  resources:
+    requests:
+      memory: "1Gi"
+    limits:
+      memory: "2Gi"
   image:
     name: *app_name_definition
+  spring_profiles_active: "postgres, ${ENV_TYPE}"
+  requires_db: true
+  db:
+    <<: *db_definition
+  prometheus: false
+  #prometheus:
+   # pod_port: 8080
+    #service_port: 80
+    #path: "/actuator/prometheus"
+
+
+postgresql:
+  name: *app_name_definition
+  triggerByConfigChange: true
+  <<: *db_definition
+
+db:
+  <<: *db_definition
+
+m2m_scopes_swagger_files:
+  - "TMF632PartyIndiv_V1.yaml"

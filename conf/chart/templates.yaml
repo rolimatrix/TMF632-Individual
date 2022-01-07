@@ -2,6 +2,9 @@ dependencies:
 - name: "app"
   version: "v2"
   dest: "charts/app"
+- name: "postgresql"
+  version: "v2"
+  dest: "charts/postgresql"
 helmfiles:
 - name: "app"
   version: "v2"

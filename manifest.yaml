@@ -1,6 +1,6 @@
 version:
   major: 1
-  minor: 0
+  minor: 2
   patch: 0
   #just leave empty string, in case you would not like to indicate a prerelease version, ex.: prerelease: ""
   #in case you would like to indicate prerlease version, do something like this: prerelease: "-rc-13"

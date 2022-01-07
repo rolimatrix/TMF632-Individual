@@ -1,12 +1,6 @@
-name: svc-zero-ikutuzov
-group: NonGiga / learning
-title: svc-zero-ikutuzov
-team: learning-team1
+name: party-management-individual
+group: party
+title: party-management-individual
+team: alf
 summary: for learning
 description: for learning
-properties:
-  deployment: kubernetes
-  healthCheckPath: /
-  pingPath: /
-  git: https://digihub-wbench.workbench.telekom.de/gitlab/infr/deployment/services/learning/svc-zero-ikutuzov
-technology: nginx

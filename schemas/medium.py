@@ -1,42 +1,42 @@
+# coding=utf-8
 from marshmallow import Schema, fields, validate, validates, ValidationError
 import re
-#from schemas.comCharracteristic import ComChar_Schema
+
 
 class MediumSchema(Schema):
     class Meta:
         ordered = True
-
     mediumType = fields.String(required=True)
     preferred = fields.Boolean(required=False)
-    mediumVerified= fields.Boolean(required=False)
-    city = fields.String(required=False)
-    contactType = fields.String(required=False)
-    country = fields.String(required=False)
-    emailAddress = fields.String(required=False)
-    faxNumber = fields.String(required=False)
-    phoneNumber = fields.String(required=False)
-    postCode = fields.String(required=False)
-    socialNetworkId = fields.String(required=False)
-    stateOrProvince = fields.String(required=False)
-    street1 = fields.String(required=False)
-    houseNumber=fields.String(required=False)
-    houseNumberAppendix=fields.String(required=False)
-    street2 = fields.String(required=False)
-    endDateTime = fields.String(required=False)
-    startDateTime = fields.String(required=False)
+    mediumVerified= fields.Boolean(required=False,allow_none=True)
+    city = fields.String(required=False,allow_none=True)
+    contactType = fields.String(required=False,allow_none=True)
+    country = fields.String(required=False,allow_none=True)
+    emailAddress = fields.String(required=False,allow_none=True)
+    faxNumber = fields.String(required=False,allow_none=True)
+    phoneNumber = fields.String(required=False,allow_none=True)
+    postCode = fields.String(required=False,allow_none=True)
+    socialNetworkId = fields.String(required=False,allow_none=True)
+    stateOrProvince = fields.String(required=False,allow_none=True)
+    street1 = fields.String(required=False,allow_none=True)
+    houseNumber=fields.String(required=False,allow_none=True)
+    houseNumberAppendix=fields.String(required=False,allow_none=True)
+    street2 = fields.String(required=False,allow_none=True)
+    endDateTime = fields.String(required=False,allow_none=True)
+    startDateTime = fields.String(required=False,allow_none=True)
 
     @validates('mediumType')
     def validate_mediumType(self, value):
         if value not in ['EMAIL', 'FIXED_LINE', 'MOBILE', 'ADDRESS', 'SOCIAL', 'FAX']:
             raise ValidationError('Invalid Medium Type delivered')
+
     @validates('emailAddress')
     def check(self, value):
         if value!='':
-            regex = '^[A-Za-z0-9]+[\._-]?[A-Za-z0-9]+[@]\w+[.]\w{2,3}$'
-            if (re.search(regex, value)):
-                print("Valid Email")
-            else:
+            regex = '^[A-Za-z0-9]+[\._-]?[A-Za-z0-9.-]+[@]\w+[.]\w{2,3}$'
+            if not (re.search(regex, value)):
                 raise ValidationError('Invalid EMail Address')
+
 class contMedtoTMF_Schema(Schema):
     class Meta:
         ordered = True
@@ -72,6 +72,5 @@ class contMedtoTMF_Schema(Schema):
                 'startDateTime': partyIndiv.startDateTime,
                 'endDateTime': partyIndiv.endDateTime,
         }
-
         return characters
 
